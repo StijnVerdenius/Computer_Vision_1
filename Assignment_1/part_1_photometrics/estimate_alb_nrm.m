@@ -28,15 +28,14 @@ normal = zeros(h, w, 3);
 %   normal at this point is g / |g|
 for row = 1:h
     for column = 1:w
-        i = reshape(image_stack(row, column, :), [img_count,1]);
+        i = image_stack(row, column, :);
+        i = reshape(i,[img_count,1]);
         if all(i(:) == 0)
             continue 
         else
             if shadow_trick == true
                 scriptI = diag(i);
-                A = scriptI * scriptV;
-                B = scriptI * i;
-                g = pinv(A)*B; % Moore-Penrose pseudo-inverse
+                g = pinv(scriptI * scriptV)*scriptI * i; % Moore-Penrose pseudo-inverse
             else
                 g = mldivide(i, scriptV);
             end
@@ -45,7 +44,7 @@ for row = 1:h
         end
     end
 end
-imshow(albedo)
+
 % Answer:
 % In each individual image we clearly see the ball divided into 4 quadrants.
 % This leads us to believe that when we buld the albedo matrix, these 4 quadrants
