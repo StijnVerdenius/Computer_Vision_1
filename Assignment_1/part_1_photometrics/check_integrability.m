@@ -6,8 +6,9 @@ function [ p, q, SE ] = check_integrability( normals )
 %   SE : Squared Errors of the 2 second derivatives
 
 % initalization
-p = zeros(size(normals));
-q = zeros(size(normals));
+[h,w,c] = size(normals);
+p = zeros([h,w]);
+q = zeros([h,w]);
 SE = zeros(size(normals));
 display(size(normals));
 
@@ -16,8 +17,8 @@ display(size(normals));
 % Compute p and q, where
 % p measures value of df / dx
 % q measures value of df / dy
-p = (normals(:,:,1))/(normals(:,:,3));
-q = (normals(:,:,2))/(normals(:,:,3));
+p = (normals(:,:,1))./(normals(:,:,3));
+q = (normals(:,:,2))./(normals(:,:,3));
 % ========================================================================
 p(isnan(p)) = 0;
 q(isnan(q)) = 0;
