@@ -45,4 +45,12 @@ for row = 1:h
         end
     end
 end
+imshow(albedo)
+% Answer:
+% In each individual image we clearly see the ball divided into 4 quadrants.
+% This leads us to believe that when we buld the albedo matrix, these 4 quadrants
+% will be shown clearly. The 4 quadrants have two different albedo values.
+% The resulting image shows that the albedo
+% is split into 4 quadrants, where it is the same for quadrants that are
+% opposit to each other, a result that was expected.
 % =========================================================================

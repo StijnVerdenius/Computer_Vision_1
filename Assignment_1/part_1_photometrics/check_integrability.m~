@@ -18,25 +18,25 @@ SE = zeros(size(normals));
 p = normals(:,:,1)/normals(:,:,3);
 q = normals(:,:,2)/normals(:,:,3);
 % ========================================================================
+
 p(isnan(p)) = 0;
 q(isnan(q)) = 0;
+
+
+
 % ========================================================================
 % YOUR CODE GOES HERE
 % approximate second derivate by neighbor difference
 % and compute the Squared Errors SE of the 2 second derivatives SE
 [height, width] = size(p);
-height_vals = [];
 for row = 1:height
-    height_vals(row,1) = height_vals(1,row-1) + q(row,1);
-end
-
-for row = 1:height
-    for column = 2:width
-        height_vals(row,column) = height_vals(row - 1) + p(row,column);
-    end
-end
+    for column = 1:width
+        
 
 % ========================================================================
+
+
+
 
 end
 
