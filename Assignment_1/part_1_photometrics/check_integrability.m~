@@ -10,14 +10,13 @@ p = zeros(size(normals));
 q = zeros(size(normals));
 SE = zeros(size(normals));
 display(size(normals));
-
 % ========================================================================
 % YOUR CODE GOES HERE
 % Compute p and q, where
 % p measures value of df / dx
 % q measures value of df / dy
-p = (normals(:,:,1))/(normals(:,:,3));
-q = (normals(:,:,2))/(normals(:,:,3));
+p = (normals(:,:,1).*normals(:,:,1))/(normals(:,:,3).*normals(:,:,3));
+q = (normals(:,:,2).*normals(:,:,2))/(normals(:,:,3).*normals(:,:,3));
 % ========================================================================
 p(isnan(p)) = 0;
 q(isnan(q)) = 0;
