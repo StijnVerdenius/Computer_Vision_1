@@ -38,14 +38,13 @@ disp('Integrability checking')
 
 threshold = 0.005;
 SE(SE <= threshold) = NaN; % for good visualization
-imshow(SE);
 fprintf('Number of outliers: %d\n\n', sum(sum(SE > threshold)));
 
 %% compute the surface height
 height_map = construct_surface( p, q );
-% imshow(height_map)
+% % % imshow(height_map)
 %% Display
-% show_model(albedo, height_map);
+%show_model(albedo, height_map);
 %
 
 %% Face

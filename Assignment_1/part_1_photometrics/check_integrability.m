@@ -28,17 +28,17 @@ q(isnan(q)) = 0;
 
 % approximate second derivate by neighbor difference
 % and compute the Squared Errors SE of the 2 second derivatives SE
-[height, width] = size(p);
-dpdy = zeros([height,width]);
-dqdx = zeros([height,width]);
+
+dpdy = zeros([h,w]);
+dqdx = zeros([h,w]);
 dpdy(:,2:end) = p(:,1:end-1) - p(:,2:end);
 dqdx(2:end,:) = q(1:end-1,:) - q(2:end,:);
 SE = (dpdy - dqdx)^2;
 
-height_vals = zeros([height,width]);
+height_vals = zeros([h,w]);
 height_vals(1,1) = 0;
 
-for row = 2:height
+for row = 2:h
     height_vals(row,1) = height_vals(1,row-1) + q(row,1);
 end
 

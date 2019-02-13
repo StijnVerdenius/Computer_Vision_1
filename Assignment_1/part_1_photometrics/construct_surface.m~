@@ -24,7 +24,7 @@ switch path_type
         % for each pixel in the left column of height_map
         for row = 2:h
             % height_value = previous_height_value + corresponding_q_value
-            height_map(row,1) = height_map(row - 1, 1) + q(row, 1);
+            height_map(row,1) = height_map(row - 1, 1) + q(row, 1)
         end
         
         
@@ -33,7 +33,7 @@ switch path_type
         %   for each element of the row except for leftmost
             for column = 2:w
         %       height_value = previous_height_value + corresponding_p_value
-                height_map(row, column) = height_map(row, column - 1) + p(row, column);
+                height_map(row, column) = height_map(row, column - 1) + p(row, column)
             end
        end
 
@@ -50,7 +50,7 @@ switch path_type
         % for each pixel in the left column of height_map
         for column = 2:w
             % height_value = previous_height_value + corresponding_q_value
-            height_map(1,column) = height_map(1, column - 1) + q(1, column);
+            height_map(1,column) = height_map(1, column - 1) + q(1, column)
         end
         
         
@@ -59,7 +59,7 @@ switch path_type
         %   for each element of the row except for leftmost
             for row = 2:h
         %       height_value = previous_height_value + corresponding_p_value
-                height_map(row, column) = height_map(row - 1, column) + p(row, column);
+                height_map(row, column) = height_map(row, column - 1) + p(row, column)
             end
        end
 
@@ -69,9 +69,8 @@ switch path_type
         
         % =================================================================
         % YOUR CODE GOES HERE
-        height_map_column = construct_surface( p, q, 'column');
-        height_map_row = construct_surface( p, q, 'row');
-        height_map = (height_map_column + height_map_row)/2;
+
+        
         % =================================================================
 end
 
