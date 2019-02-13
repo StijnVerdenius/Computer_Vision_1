@@ -1,0 +1,1 @@
+grayWorld('awb.jpg')
