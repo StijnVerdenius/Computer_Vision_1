@@ -14,11 +14,11 @@ c_img = lin2rgb(c_img_lin);
 
 figure(1)
 
-subplot(2,1,1)
+subplot(1,2,1)
 imshow(img)
 title('Original image')
 
-subplot(2,1,2)
+subplot(1,2,2)
 imshow(c_img)
 title('Corrected image')
 
