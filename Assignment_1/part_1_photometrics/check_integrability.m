@@ -31,19 +31,23 @@ q(isnan(q)) = 0;
 
 dpdy = zeros([h,w]);
 dqdx = zeros([h,w]);
+
+%dpdy = gradient(p);
+%dqdx = gradient(q);
 dpdy(:,2:end) = p(:,1:end-1) - p(:,2:end);
 dqdx(2:end,:) = q(1:end-1,:) - q(2:end,:);
-SE = (dpdy - dqdx)^2;
+
+SE = (dpdy - dqdx).^2;
 
 height_vals = zeros([h,w]);
 height_vals(1,1) = 0;
 
 for row = 2:h
-    height_vals(row,1) = height_vals(1,row-1) + q(row,1);
+    height_vals(row,1) = height_vals(row-1,1) + q(row,1);
 end
 
-for row = 1:height
-    for column = 2:width
+for row = 1:h
+    for column = 2:w
         height_vals(row,column) = height_vals(row,column - 1) + p(row,column);
     end
 end

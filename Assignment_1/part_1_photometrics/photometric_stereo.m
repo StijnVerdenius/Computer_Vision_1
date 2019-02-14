@@ -29,9 +29,9 @@ disp('Computing surface albedo and normal map...')
 % [albedo25, normals25] = estimate_alb_nrm(image_stack25, scriptV25);
 
 % subplot(1,2,1);
-% imshow(albedo5);
+ imshow(albedo5);
 % subplot(1,2,2);
-% imshow(albedo25);
+%imshow(albedo25);
 %% integrability check: is (dp / dy  -  dq / dx) ^ 2 small everywhere?
 disp('Integrability checking')
 [p, q, SE] = check_integrability(normals5);
@@ -39,17 +39,17 @@ disp('Integrability checking')
 threshold = 0.005;
 SE(SE <= threshold) = NaN; % for good visualization
 imshow(SE);
+display(size(SE))
 fprintf('Number of outliers: %d\n\n', sum(sum(SE > threshold)));
 
 %% compute the surface height
 height_map = construct_surface( p, q );
-% imshow(height_map)
+imshow(height_map)
 %% Display
-% show_model(albedo, height_map);
+show_model(albedo5, height_map);
 %
-
 %% Face
-[image_stack, scriptV] = load_face_images('./yaleB02/');
+[image_stack, scriptV] = load_face_images('./photometrics_images/yaleB02/');
 [h, w, n] = size(image_stack);
 fprintf('Finish loading %d images.\n\n', n);
 disp('Computing surface albedo and normal map...')
