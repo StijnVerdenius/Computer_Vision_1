@@ -1,16 +1,26 @@
 function [] = grayWorld(image)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
 
 img = imread(image);
 
-img_lin = rgb2lin(img);
+R = img(:,:,1);
+G = img(:,:,2);
+B = img(:,:,3);
 
-illuminant = illumgray(img_lin);
+m_R = mean(R,'all');
+m_G = mean(G, 'all');
+m_B = mean(B, 'all');
 
-c_img_lin = chromadapt(img_lin,illuminant,'ColorSpace','linear-rgb');
+gray = 128;
 
-c_img = lin2rgb(c_img_lin);
+R_r = gray/m_R;
+G_r = gray/m_G;
+B_r = gray/m_B;
+
+n_R = R_r.*R;
+n_G = G_r.*G;
+n_B = B_r.*B;
+
+c_img = cat(3,n_R,n_G,n_B);
 
 figure(1)
 
