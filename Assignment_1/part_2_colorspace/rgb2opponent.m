@@ -14,12 +14,12 @@ RG = double(R+G);
 RGB = double(sum(input_image, 3));
 
 % calculate opponents
-O_1 = RG ./ sqrt(2);
-O_2 = RG - (2*B) ./ sqrt(6);
-O_3 = RGB / sqrt(3);
+O_1 = (R-G) ./ sqrt(2);
+O_2 = (RG - (2 .* B)) ./ sqrt(6);
+O_3 = RGB ./ sqrt(3);
 
 % recombine image
-output_image = uint8(cat(3, O_1, O_2, O_3));
+output_image = cat(3, O_1, O_2, O_3);
 
 end
 

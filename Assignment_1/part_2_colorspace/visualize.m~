@@ -1,0 +1,18 @@
+function visualize(input_image)
+
+
+number_of_channels = size(input_image);
+number_of_channels =  number_of_channels(end);
+number_of_plots = number_of_channels + 1;
+
+
+figure
+
+subplot(
+
+
+% temp
+imshow(input_image)
+
+end
+

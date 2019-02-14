@@ -5,7 +5,7 @@ function [output_image] = rgb2normedrgb(input_image)
 RGB = double(sum(input_image, 3));
 
 % Divide each element by said sum
-output_image = uint8((double(input_image) ./ RGB )*255) ;
+output_image = uint8((double(input_image) ./ RGB ) .*255) ;
 
 end
 
