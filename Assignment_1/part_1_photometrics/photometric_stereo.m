@@ -128,16 +128,35 @@ height_map_avg = construct_surface( p5, q5, "average");
 height_map_row = construct_surface( p5, q5, "row");
 height_map_column = construct_surface( p5, q5, "column");
 
-figure(3)
-subplot(2,2,1)
-imshow(height_map_avg);
-title("average")
-subplot(2,2,2)
+figure(1)
+subplot(1,3,1)
 imshow(height_map_row);
-title("row")
-subplot(2,2,3);
+title("height map row")
+
+subplot(1,3,2)
 imshow(height_map_column);
-title("column")
+title("height map column")
+
+subplot(1,3,3);
+imshow(height_map_avg);
+title("height map average")
+
+return;
+
+subplot(2,3,4)
+show_model(albedo5_trick, height_map_avg);
+title("model average")
+
+subplot(2,3,5);
+show_model(albedo5_trick, height_map_column);
+title("model column")
+
+subplot(2,3,6)
+show_model(albedo5_trick, height_map_row);
+title("model row")
+
+return;
+
 %% Display
 show_model(albedo5_trick, height_map_avg);
 return;

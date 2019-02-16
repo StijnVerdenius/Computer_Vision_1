@@ -14,8 +14,6 @@ image_dir_25 = './photometrics_images/SphereGray25/';   % TODO: get the path of 
 % SphereColor
 image_dir_25_rgb = './photometrics_images/SphereColor/';   % TODO: get the path of the script
 
-[image_stack5, scriptV5] = load_syn_images(image_dir_5, 5);
-
 % RGB version of sphere
 % [image_stack25rgb_ch1, scriptV25rgb_ch1] = load_syn_images(image_dir_25_rgb, 25, 1);
 % [image_stack25rgb_ch3, scriptV25rgb_ch2] = load_syn_images(image_dir_25_rgb, 25, 2);
@@ -127,20 +125,39 @@ fprintf('Number of outliers SE25: %d\n\n', sum(sum(SE25 > threshold)));
 
 %% compute the surface height
 height_map_avg = construct_surface( p5, q5, "average");
-height_map_avg = construct_surface( p5, q5, "average");
-height_map_avg = construct_surface( p5, q5, "average");
-imshow(height_map)
+height_map_row = construct_surface( p5, q5, "row");
+height_map_column = construct_surface( p5, q5, "column");
 
-figure(3)
-subplot(1,2,1)
-imshow(SE5);
-title(sum(sum(SE5 > threshold)))
-subplot(1,2,2)
-imshow(SE25);
-title(sum(sum(SE25 > threshold)))
+% figure(1)
+% subplot(1,3,1)
+show_model(albedo5_trick, height_map_avg);
+title("model average")
+subplot(1,3,2);
+show_model(albedo5_trick, height_map_column);
+title("model column")
+subplot(1,3,3)
+show_model(albedo5_trick, height_map_row);
+title("model row")
+
+return;
+
+figure(1)
+subplot(1,3,1)
+imshow(height_map_row);
+title("height map row")
+
+subplot(1,3,2)
+imshow(height_map_column);
+title("height map column")
+
+subplot(1,3,3);
+imshow(height_map_avg);
+title("height map average")
+
+return;
 
 %% Display
-show_model(albedo5, height_map);
+show_model(albedo5_trick, height_map_avg);
 return;
 %
 %% Face
