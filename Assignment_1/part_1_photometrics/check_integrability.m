@@ -10,7 +10,6 @@ function [ p, q, SE ] = check_integrability( normals )
 p = zeros([h,w]);
 q = zeros([h,w]);
 SE = zeros(size(normals));
-display(size(normals));
 
 % ========================================================================
 % YOUR CODE GOES HERE

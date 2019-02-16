@@ -59,7 +59,7 @@ switch path_type
         %   for each element of the row except for leftmost
             for row = 2:h
         %       height_value = previous_height_value + corresponding_p_value
-                height_map(row, column) = height_map(row - 1, column) + p(row, column);
+                height_map(row, column) = height_map(row - 1, column) + q(row, column);
             end
        end
 
