@@ -11,7 +11,7 @@ image_dir_25 = './photometrics_images/SphereGray25/';   % TODO: get the path of 
 
 %image_ext = '*.png';
 % 5 Images
-[image_stack5, scriptV5] = load_syn_images(image_dir_5, 5);
+[image_stack5, scriptV5] = load_syn_images(image_dir_5);
 [h5, w5, n5] = size(image_stack5);
 fprintf('Finish loading %d images.\n\n', n5);
 
@@ -21,7 +21,7 @@ disp('Computing surface albedo and normal map...')
 [albedo5_trick, normals5_trick] = estimate_alb_nrm(image_stack5, scriptV5);
 
 % 25 Images
-[image_stack25, scriptV25] = load_syn_images(image_dir_25, 25);
+[image_stack25, scriptV25] = load_syn_images(image_dir_25);
 [h25, w25, n25] = size(image_stack25);
 fprintf('Finish loading %d images.\n\n', n25);
 
@@ -43,41 +43,30 @@ title("Albedo 5 with trick")
 subplot(2,2,4);
 imshow(albedo25_trick);
 title("Albedo 25 with trick")
-%% How many images do we need to estimate albedo?
+%% 
 
 figure(2)
 i = 0;
 for num_images=(5:5:25)
     
     [image_stack_i, scriptV_i] = load_syn_images(image_dir_25, num_images);
-    [albedo_i, normals_i] = estimate_alb_nrm(image_stack_i, scriptV_i, false);
+    [albedo_i, normals_i] = estimate_alb_nrm(image_stack_i, scriptV_i);
     
     i = i + 1;
-    subplot(2, 5, i)
+    subplot(1, 5, i)
     imshow(albedo_i)
-    title(num_images)
-    subplot(2, 5, i + 5)
-    imshow(normals_i)
     title(num_images)
 end
 
 %% integrability check: is (dp / dy  -  dq / dx) ^ 2 small everywhere?
 disp('Integrability checking')
-[p5, q5, SE5] = check_integrability(normals5);
-[p25, q25, SE25] = check_integrability(normals25);
+[p, q, SE] = check_integrability(normals25);
 
 threshold = 0.005;
-SE5(SE5 <= threshold) = NaN; % for good visualization
-SE25(SE25 <= threshold) = NaN; % for good visualization
-figure(3)
-subplot(1,2,1)
-imshow(SE5);
-title(sum(sum(SE5 > threshold)))
-subplot(1,2,2)
-imshow(SE25);
-title(sum(sum(SE25 > threshold)))
-% display(size(SE))
-% fprintf('Number of outliers: %d\n\n', sum(sum(SE > threshold)));
+SE(SE <= threshold) = NaN; % for good visualization
+imshow(SE);
+display(size(SE))
+fprintf('Number of outliers: %d\n\n', sum(sum(SE > threshold)));
 
 %% compute the surface height
 height_map = construct_surface( p, q, "average");
