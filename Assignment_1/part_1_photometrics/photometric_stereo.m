@@ -90,10 +90,10 @@ disp('Computing surface albedo and normal map...')
 % figure(2)
 % i = 0;
 % for num_images=(5:5:25)
-%     
+%      
 %     [image_stack_i, scriptV_i] = load_syn_images(image_dir_25, num_images);
 %     [albedo_i, normals_i] = estimate_alb_nrm(image_stack_i, scriptV_i, false);
-%     
+% %     
 %     i = i + 1;
 %     subplot(2, 5, i)
 %     imshow(albedo_i)
@@ -104,13 +104,13 @@ disp('Computing surface albedo and normal map...')
 % end
 
 %% integrability check: is (dp / dy  -  dq / dx) ^ 2 small everywhere?
-disp('Integrability checking')
-[p5, q5, SE5] = check_integrability(normals5_trick);
-[p25, q25, SE25] = check_integrability(normals25_trick);
-
-threshold = 0.005;
-SE5(SE5 <= threshold) = NaN; % for good visualization
-SE25(SE25 <= threshold) = NaN; % for good visualization
+% disp('Integrability checking')
+% [p5, q5, SE5] = check_integrability(normals5_trick);
+% [p25, q25, SE25] = check_integrability(normals25_trick);
+% 
+% threshold = 0.005;
+% SE5(SE5 <= threshold) = NaN; % for good visualization
+% SE25(SE25 <= threshold) = NaN; % for good visualization
 % figure(3)
 % subplot(1,2,1)
 % imshow(SE5);
@@ -120,49 +120,50 @@ SE25(SE25 <= threshold) = NaN; % for good visualization
 % title(sum(sum(SE25 > threshold)))
 
 % display(size(SE))
-fprintf('Number of outliers SE5: %d\n\n', sum(sum(SE5 > threshold)));
-fprintf('Number of outliers SE25: %d\n\n', sum(sum(SE25 > threshold)));
-
-%% compute the surface height
-height_map_avg = construct_surface( p5, q5, "average");
-height_map_row = construct_surface( p5, q5, "row");
-height_map_column = construct_surface( p5, q5, "column");
-
-figure(1)
-subplot(1,3,1)
-imshow(height_map_row);
-title("height map row")
-
-subplot(1,3,2)
-imshow(height_map_column);
-title("height map column")
-
-subplot(1,3,3);
-imshow(height_map_avg);
-title("height map average")
-
-return;
-
-subplot(2,3,4)
-show_model(albedo5_trick, height_map_avg);
-title("model average")
-
-subplot(2,3,5);
-show_model(albedo5_trick, height_map_column);
-title("model column")
-
-subplot(2,3,6)
-show_model(albedo5_trick, height_map_row);
-title("model row")
-
-return;
-
-%% Display
-show_model(albedo5_trick, height_map_avg);
-return;
+%fprintf('Number of outliers SE5: %d\n\n', sum(sum(SE5 > threshold)));
+% fprintf('Number of outliers SE25: %d\n\n', sum(sum(SE25 > threshold)));
+% 
+% %% compute the surface height
+% height_map_avg = construct_surface( p5, q5, "average");
+% height_map_row = construct_surface( p5, q5, "row");
+% height_map_column = construct_surface( p5, q5, "column");
+% 
+% figure(1)
+% subplot(1,3,1)
+% imshow(height_map_row);
+% title("height map row")
+% 
+% subplot(1,3,2)
+% imshow(height_map_column);
+% title("height map column")
+% 
+% subplot(1,3,3);
+% imshow(height_map_avg);
+% title("height map average")
+% 
+% return;
+% 
+% subplot(2,3,4)
+% show_model(albedo5_trick, height_map_avg);
+% title("model average")
+% 
+% subplot(2,3,5);
+% show_model(albedo5_trick, height_map_column);
+% title("model column")
+% 
+% subplot(2,3,6)
+% show_model(albedo5_trick, height_map_row);
+% title("model row")
+% 
+% return;
+% 
+% %% Display
+% show_model(albedo5_trick, height_map_avg);
+% return;
 %
 %% Face
-[image_stack, scriptV] = load_face_images('./photometrics_images/MonkeyGray/');
+%[image_stack, scriptV] = load_face_images('./photometrics_images/MonkeyGray/');
+[image_stack, scriptV] = load_syn_images('./photometrics_images/MonkeyGray/', 25);
 [h, w, n] = size(image_stack);
 fprintf('Finish loading %d images.\n\n', n);
 disp('Computing surface albedo and normal map...')
@@ -178,7 +179,9 @@ fprintf('Number of outliers: %d\n\n', sum(sum(SE > threshold)));
 
 %% compute the surface height
 height_map = construct_surface( p, q );
-
+[X,Y] = meshgrid(1:1:512,1:1:512);
+s = surf(X,Y,height_map);
+colormap
 %show_results(albedo, normals, SE);
-show_model(albedo, height_map);
+%show_model(albedo, height_map);
 
