@@ -163,7 +163,12 @@ disp('Computing surface albedo and normal map...')
 %
 %% Face
 %[image_stack, scriptV] = load_face_images('./photometrics_images/MonkeyGray/');
-[image_stack, scriptV] = load_syn_images('./photometrics_images/MonkeyGray/', 25);
+%image_dir = './photometrics_images/yaleB02/'
+%load_face_images(image_dir)
+
+
+% ------------ CHANGE DIR HERE -----------------
+[image_stack, scriptV] = load_syn_images('./photometrics_images/MonkeyGray/', 110);
 [h, w, n] = size(image_stack);
 fprintf('Finish loading %d images.\n\n', n);
 disp('Computing surface albedo and normal map...')
@@ -179,9 +184,9 @@ fprintf('Number of outliers: %d\n\n', sum(sum(SE > threshold)));
 
 %% compute the surface height
 height_map = construct_surface( p, q );
-[X,Y] = meshgrid(1:1:512,1:1:512);
-s = surf(X,Y,height_map);
-colormap
-%show_results(albedo, normals, SE);
-%show_model(albedo, height_map);
+%[X,Y] = meshgrid(1:1:512,1:1:512);
+% s = surf(X,Y,height_map);
+% colormap
+show_results(albedo, normals, SE);
+show_model(albedo, height_map);
 
