@@ -11,12 +11,13 @@ per_axis = ceil(sqrt(number_of_plots));
 % unfortunatly there is no support for a fourth channel so we assume 3
 subplot(per_axis, per_axis, 1)
 imshow(input_image(:,:,1:3))
+title("All channels")
 
 % plot seperate channels
 for i=1:number_of_channels
     subplot(per_axis, per_axis, 1+i)
     imshow(input_image(:,:,i))
+    title("Channel "+int2str(i))
 end
 
 end
-
