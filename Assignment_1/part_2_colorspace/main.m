@@ -1,4 +1,4 @@
-% test your code by using this simple script
+%% main script
 
 clear
 clc
