@@ -35,7 +35,7 @@ for row = 1:h
         else
             if shadow_trick == true
                 scriptI = diag(i);
-                g = pinv(scriptI * scriptV)*scriptI * i; % Moore-Penrose pseudo-inverse
+                g = linsolve(scriptI * scriptV,scriptI * i); % Moore-Penrose pseudo-inverse
             else
                 g = mldivide(i, scriptV);
             end
