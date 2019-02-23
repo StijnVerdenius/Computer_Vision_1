@@ -1,0 +1,11 @@
+function [ imOut ] = denoise( image, kernel_type, varargin)
+
+switch kernel_type
+    case 'box'
+%         B = imboxfilt(image,filterSize)
+    case 'median'
+%         M = medfilt2(image)
+    case 'gaussian'
+        G = = imfilter(image,gauss2D(varargin{:}
+end
+end
