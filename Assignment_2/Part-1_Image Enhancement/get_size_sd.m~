@@ -1,0 +1,25 @@
+function [b_sd] = get_size_sd(image, size)
+
+ids = [];
+PSNR_values = [];
+
+for stde = 1:10
+        i2 = denoise(image, 'gaussian', size, stde);
+        ids = [ids, stde];
+        PSNR_values = [PSNR_values, myPSNR(image, i2)];
+    end
+end
+        
+M = containers.Map(PSNR_values,ids);
+
+disp('keys')
+keys(M)
+
+disp('values')
+values(M)
+
+b_sd = M(max(keys(M)));
+
+        
+end
+
