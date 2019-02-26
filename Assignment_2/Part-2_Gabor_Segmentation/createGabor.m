@@ -11,7 +11,7 @@ function [ myGabor ] = createGabor( sigma, theta, lambda, psi, gamma )
 %     psi        Phase offset for the carrier signal, sin(w_c . t + psi).
 %     gamma      Controls the aspect ratio of the Gaussian envelope
 %   
-%   - OUTPUT
+%   - OUTPUTc
 %     myGabor    A matrix of size [h,w,2], holding the real and imaginary 
 %                parts of the Gabor in myGabor(:,:,1) and myGabor(:,:,2),
 %                respectively.

@@ -1,7 +1,8 @@
 %% Hyperparameters
+clear
 k        = 2;      % number of clusters in k-means algorithm. By default, 
                    % we consider k to be 2 in foreground-background segmentation task.
-image_id = 'Kobi'; % Identifier to switch between input images.
+image_id = 'Cows'; % Identifier to switch between input images.
                    % Possible ids: 'Kobi',    'Polar', 'Robin-1'
                    %               'Robin-2', 'Cows'
 
@@ -10,7 +11,7 @@ err_msg  = 'Image not available.';
 
 % Control settings
 visFlag       = false;    %  Set to true to visualize filter responses.
-smoothingFlag = false;   %  Set to true to postprocess filter outputs.
+smoothingFlag = true;   %  Set to true to postprocess filter outputs.
 
 %% Read image
 switch image_id
@@ -69,11 +70,13 @@ lambdas = (2.^(0:(n-2)) * lambdaMin);
 % Define the set of orientations for the Gaussian envelope.
 dTheta      = 2*pi/8;                  % \\ the step size
 orientations = 0:dTheta:(pi/2); 
-
+% orientations = -pi/8;
+% orientations = [pi/5,pi/4,pi/6];
 % Define the set of sigmas for the Gaussian envelope. Sigma here defines 
 % the standard deviation, or the spread of the Gaussian. 
-sigmas = [1,2];
-
+% sigmas = [0.5,0.75,1,1.25,1.5,1.75,2];
+sigmas = [0.8];
+K = 1;
 % Now you can create the filterbank. We provide you with a MATLAB struct
 % called gaborFilterBank in which we will hold the filters and their
 % corresponding parameters such as sigma, lambda and etc. 
@@ -192,8 +195,9 @@ if smoothingFlag
     %END_FOR
     smoothed_featureMags =  cell(length(gaborFilterBank),1);
     for jj = 1:length(featureMags)
-        K = 8
-        smoothed_featureMags{jj} = imgaussfilt(featureMags{jj}, K);
+%         h = fspecial('gaussian',[5 5], 8);
+%         smoothed_featureMags{jj} = imfilter(featureMags{jj}, h);
+        smoothed_featureMags{jj} = imgaussfilt(featureMags{jj}, K);% K*0.5*gaborFilterBank(jj).lambda);
         features(:,:,jj) = smoothed_featureMags{jj};
     end
 else
@@ -214,9 +218,11 @@ features = reshape(features, numRows * numCols, []);
 % Standardize features. 
 % \\ Hint: see http://ufldl.stanford.edu/wiki/index.php/Data_Preprocessing
 %          for more information. \\
-features = im2double(features);% \\ TODO: i)  Implement standardization on matrix called features. 
+% features = bsxfun(@minus, features, mean(features));
+% features = bsxfun(@rdivide,features,std(features));
+% features = zscore(features, 0, 2);% \\ TODO: i)  Implement standardization on matrix called features. 
            %          ii) Return the standardized data matrix.
-
+features = im2double(features);
 
 % (Optional) Visualize the saliency map using the first principal component 
 % of the features matrix. It will be useful to diagnose possible problems 
@@ -235,6 +241,7 @@ imshow(feature2DImage,[]), title('Pixel representation projected onto first PC')
 tic
 % pixLabels = % \\TODO: Return cluster labels per pixel
 pixLabels = kmeans(features,k,'Replicates',5, "Display", "final");%, "Distance", "cityblock");
+% pixLabels = kmeans(features, k);
 ctime = toc;
 fprintf('Clustering completed in %.3f seconds.\n', ctime);
 
