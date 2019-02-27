@@ -6,7 +6,7 @@ PSNR_values = [];
 for stde = 1:10
     i2 = denoise(image, 'gaussian', size, stde);
     ids = [ids, stde];
-    PSNR_values = [PSNR_values, myPSNR('images/image1.jpg', i2)];
+    PSNR_values = [PSNR_values, myPSNR('image, i2)];
 end
         
 M = containers.Map(PSNR_values,ids);
