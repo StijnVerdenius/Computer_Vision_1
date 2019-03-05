@@ -1,13 +1,15 @@
 function result = tracking(images)
 
-first_img = images(1);
+first_img = images(1).data;
 
-[H, c, s] = harris_corner_detector(first_img(0));
+[H, R, C] = harris_corner_detector(first_img);
 
-result = 0;
+result = [];
 
-current_c = 0;
-current_s = 0;
+current_R = R;
+current_C = C;
+
+result = [result ; current_R, current_C];
 
 for index = 1:numel(images)-1
     img1 = images(index).data;
@@ -27,12 +29,10 @@ for index = 1:numel(images)-1
     % Calculate velocities
     vectors = calc_velocity(regions1,regions2);
     
-    current_c = current_c + vectors;
-    current_s = current_s + vectors;
+    current_R = current_R + vectors;
+    current_C = current_C + vectors;
     
-    result = [result ; current_c, current_s];
+    result = [result ; current_R, current_C];
 end
-
-
 
 end
