@@ -30,9 +30,9 @@ for index = 1:numel(images)-1
     current_c = current_c + vectors;
     current_s = current_s + vectors;
     
-    result = [result ; current_c, current_s];
+    
 end
 
-
+result = 0;
 
 end
