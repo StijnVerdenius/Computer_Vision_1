@@ -1,13 +1,12 @@
-function files = read_directory(name)
+function files = read_directory(path, name, extensions)
 
 
 
-D = name;
-S = dir(fullfile(D,'name*.jpg')); % pattern to match filenames.
+D = path;
+S = dir(fullfile(D,name+extension)); % pattern to match filenames.
 for k = 1:numel(S)
     F = fullfile(D,S(k).name);
     I = imread(F);
-    imshow(I)
     S(k).data = I; % optional, save data.
 end
 
