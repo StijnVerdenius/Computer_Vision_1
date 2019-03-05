@@ -1,23 +1,16 @@
 function [H, R, C] = harris_corner_detector(Im, w, threshold)
+% Inputs: Image
+%         Window for local maxima, default 7
+%         threshold for cornerness detection, default 10
+% Outputs: Cornerness H
+%          Row coordinates for corner points
+%          Column coordinates for corner points
 
-sigma = 2;
-n = 3;
-
+% preprocess image
 I = im2double(Im);
 I = rgb2gray(I);
 
-dx = [1 0 -1; 1 0 -1; 1 0 -1];
-dy = dx';
-
-Ix = imfilter(I, dx);
-Iy = imfilter(I, dy);
-
-G = fspecial("gaussian", n, sigma);
-
-IxIx = imfilter(Ix.^2, G);
-IyIy = imfilter(Iy.^2, G);
-IxIy = imfilter(Ix.*Iy, G);
-
+% plot partial derivatives
 figure(1)
 subplot(2, 1, 1);
 imshow(Ix);
@@ -26,10 +19,31 @@ subplot(2, 1, 2);
 imshow(Iy);
 title("image derivatives Y'axis");
 
+% partial derivatives
+dx = [1 0 -1; 1 0 -1; 1 0 -1];
+dy = dx';
+Ix = imfilter(I, dx);
+Iy = imfilter(I, dy);
 
+% parameters for gaussian filter
+sigma = 2;
+n = 3;
+
+% gaussian filter
+G = fspecial("gaussian", n, sigma);
+
+% Q matrix
+IxIx = imfilter(Ix.^2, G);
+IyIy = imfilter(Iy.^2, G);
+IxIy = imfilter(Ix.*Iy, G);
+
+% rows and columns of the image
 [r, c] = size(IxIx);
+
+% predefine cornerness H
 H = zeros(r, c);
 
+% roll the window over the image to calculate cornerness
 for i=2:r-1
     for j=2:c-1
         
@@ -42,6 +56,7 @@ for i=2:r-1
     end
 end
 
+% Identify local maxima that are above the threshold as Edges
 Edge = zeros(r, c);
 step = floor(w/2);
 for i=(step+1):r-(step+1)
@@ -51,6 +66,8 @@ for i=(step+1):r-(step+1)
     end
 end
 
+
+% Plot the Edges on the Image I
 figure(2);
 imshow(Im);
 hold on;
