@@ -1,10 +1,7 @@
-function H = harris_corner_detector(Im)
+function [H, R, C] = harris_corner_detector(Im, w, threshold)
 
 sigma = 2;
 n = 3;
-
-N = 7;
-threshold = 10;
 
 I = im2double(Im);
 I = rgb2gray(I);
@@ -45,10 +42,8 @@ for i=2:r-1
     end
 end
 
-% H = zscore(H, 1);
-
 Edge = zeros(r, c);
-step = floor(N/2);
+step = floor(w/2);
 for i=(step+1):r-(step+1)
     for j=(step+1):c-(step+1)
         Edge(i, j) = (H(i, j) == max(max(H(i-step:i+step, j-step:j+step)))) ...
@@ -59,14 +54,18 @@ end
 figure(2);
 imshow(Im);
 hold on;
+idx = 0;
 for i=1:r
     for j=1:c
         if Edge(i, j) == 1
+           idx = idx + 1;
+           R(idx) = i;
+           C(idx) = j;
            plot(j, i, 'r*') 
         end
     end
 end
 hold off;
-title("Harris Edge Detection");
+title("Harris Corner Detection");
 
 end
