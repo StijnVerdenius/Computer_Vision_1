@@ -5,8 +5,19 @@ function [cells] = divide_in_regions(img,reg_size)
 [h,w] = size(img);
 num_regs_x = idivide(int32(h), int32(reg_size), 'floor');
 num_regs_y = idivide(int32(w), int32(reg_size), 'floor');
-div_x = [reg_size.*ones(1,num_regs_x), h-num_regs_x*reg_size];
-div_y = [reg_size.*ones(1,num_regs_y), h-num_regs_y*reg_size];
+
+if num_regs_x ~= h/reg_size
+    div_x = [reg_size.*ones(1,num_regs_x), h-num_regs_x*reg_size];
+else
+    div_x = reg_size.*ones(1,num_regs_x);
+end
+
+if num_regs_y ~= w/reg_size
+    div_y = [reg_size.*ones(1,num_regs_y), h-num_regs_y*reg_size];
+else
+    div_y = reg_size.*ones(1,num_regs_y);
+end
+
 cells = mat2cell(img,div_x, div_y);
 end
 
