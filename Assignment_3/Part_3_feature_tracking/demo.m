@@ -8,7 +8,7 @@ path2 = "./person_toy/"; % if run from assignment_3 folder
 
 % get video
 pingpong_imgs = read_directory(path1, '*', ".jpeg");
-pingpong_imgs = pingpong_imgs;
+pingpong_imgs = pingpong_imgs(1:10);
 % toy_imgs = read_directory(path2, '*', ".jpg");
 
 % track objects through video

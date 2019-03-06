@@ -1,6 +1,6 @@
 function [points, veccies] = tracking(images)
 
-fracture = 4;
+fracture = ;
 
 % get the first frame of video
 first_img = images(1).data;
@@ -27,7 +27,7 @@ for index = 1:numel(images)-1
     regions2 = divide_in_regions(rgb2gray(grayImg2), fracture);
     
     % Calculate velocities for regions
-    [Vxs,Vys] = phillip(rgb2gray(grayImg1), rgb2gray(grayImg2), false, fracture);
+    [Vxs,Vys] = phillip(rgb2gray(grayImg1), rgb2gray(grayImg2), false, 15);
     
     vecX = zeros(size(current_R));
     vecY = zeros(size(current_C));
@@ -39,8 +39,8 @@ for index = 1:numel(images)-1
         x_location = round(current_C(in) / size(Vxs, 2));
         y_location = round(current_R(in) /  size(Vys, 1));
         
-        vecY(in) = Vys(x_location, y_location).*multiplication;
-        vecX(in) = Vxs(x_location, y_location).*multiplication;
+        vecY(in) = Vys(y_location, x_location).*multiplication;
+        vecX(in) = Vxs(y_location, x_location).*multiplication;
     end
     
     % add velocities as vector to current 
