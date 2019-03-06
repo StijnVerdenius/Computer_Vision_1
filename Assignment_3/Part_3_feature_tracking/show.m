@@ -9,6 +9,8 @@ figure(1)
 
 % loop through video
 for frame = 1:size(imgs, 1)
+    
+   frame
 
    % plot videoframe
    imshow(imgs(frame).data)
