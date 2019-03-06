@@ -10,8 +10,6 @@ function [H, R, C] = harris_corner_detector(Im, w, threshold)
 I = im2double(Im);
 I = rgb2gray(I);
 
-
-
 % partial derivatives
 dx = [1 0 -1; 1 0 -1; 1 0 -1];
 dy = dx';
@@ -22,10 +20,11 @@ Iy = imfilter(I, dy);
 figure(1)
 subplot(2, 1, 1);
 imshow(Ix);
-title("image derivatives X'axis");
+% title("image derivatives X'axis");
 subplot(2, 1, 2);
 imshow(Iy);
-title("image derivatives Y'axis");
+% title("image derivatives Y'axis");
+% saveas(gcf, "IxIy_"+string(w)+"_"+string(threshold)+".png");
 
 % parameters for gaussian filter
 sigma = 2;
@@ -52,6 +51,7 @@ for i=2:r-1
         A = sum(sum(IxIx(i-1:i+1, j-1:j+1)));
         B = sum(sum(IxIy(i-1:i+1, j-1:j+1)));
         C = sum(sum(IyIy(i-1:i+1, j-1:j+1)));
+        
         
         H(i, j) = (A*C + B^2) - 0.04*(A+C)^2;
         
@@ -85,6 +85,7 @@ for i=1:r
     end
 end
 hold off;
-title("Harris Corner Detection");
+% title("Harris Corner Detection");
+% saveas(gcf, "ppong\H_"+string(w)+"_"+string(threshold)+".png");
 
 end
