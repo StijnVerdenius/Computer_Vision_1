@@ -17,12 +17,14 @@ Ix = imfilter(I, dx);
 Iy = imfilter(I, dy);
 
 % plot partial derivatives
-fig_num = randi([1 1000]);
-figure(fig_num);
+figure(1)
 subplot(2, 1, 1);
 imshow(Ix);
+% title("image derivatives X'axis");
 subplot(2, 1, 2);
 imshow(Iy);
+% title("image derivatives Y'axis");
+% saveas(gcf, "IxIy_"+string(w)+"_"+string(threshold)+".png");
 
 % parameters for gaussian filter
 sigma = 2;
@@ -68,8 +70,7 @@ end
 
 
 % Plot the Edges on the Image I
-fig_num = randi([1 1000]);
-figure(fig_num);
+figure(2);
 imshow(Im);
 hold on;
 idx = 0;
@@ -84,5 +85,7 @@ for i=1:r
     end
 end
 hold off;
+% title("Harris Corner Detection");
+% saveas(gcf, "ppong\H_"+string(w)+"_"+string(threshold)+".png");
 
 end
