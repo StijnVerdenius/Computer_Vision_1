@@ -1,5 +1,5 @@
 % original image
-im = imread("person_toy\00000001.jpg");
+im = imread("./../person_toy\00000001.jpg");
 
 % rotated versions
 im45 = imrotate(im, 45);

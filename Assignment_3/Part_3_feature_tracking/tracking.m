@@ -9,8 +9,8 @@ first_img = images(1).data;
 [~, R, C] = harris_corner_detector(first_img, 7, 10);
 
 % set firsts for tracking
-current_R = R(1:2);
-current_C = C(1:2);
+current_R = R(1:end);
+current_C = C(1:end);
 timestep = cat(3, current_R, current_C);
 points = cat(1, timestep);
 veccies = zeros(size(points));
@@ -39,8 +39,8 @@ for index = 1:numel(images)-1
         x_location = round(current_C(in) / size(Vxs, 2));
         y_location = round(current_R(in) /  size(Vys, 1));
         
-        vecY(in) = Vys(y_location, x_location).*multiplication;
-        vecX(in) = Vxs(y_location, x_location).*multiplication;
+        vecY(in) = Vys(y_location+1, x_location+1).*multiplication;
+        vecX(in) = Vxs(y_location+1, x_location+1).*multiplication;
     end
     
     % add velocities as vector to current 
