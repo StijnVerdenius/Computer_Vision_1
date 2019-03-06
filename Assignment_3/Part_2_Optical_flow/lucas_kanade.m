@@ -22,8 +22,8 @@
 % imshow('synth2.pgm');
 
 % Read image
-img1= imread('synth1.pgm');
-img2= imread('synth2.pgm');
+img1= imread('sphere1.ppm');
+img2= imread('sphere2.ppm');
 [h,w,chs] = size(img1);
 
 % Convert to grey scale
