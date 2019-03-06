@@ -1,4 +1,6 @@
-function result = tracking(images)
+function [points, veccies] = tracking(images)
+
+fracture = 16;
 
 % get the first frame of video
 first_img = images(1).data;
@@ -10,7 +12,8 @@ first_img = images(1).data;
 current_R = R;
 current_C = C;
 timestep = cat(3, current_R, current_C);
-result = cat(1, timestep);
+points = cat(1, timestep);
+veccies = zeros(size(points));
 
 % for each frame update corners by their velocity
 for index = 1:numel(images)-1
@@ -20,18 +23,23 @@ for index = 1:numel(images)-1
     grayImg2 = images(index+1).data;
     
     % split in regions
-    regions1 = divide_in_regions(rgb2gray(grayImg1), 16);
-    regions2 = divide_in_regions(rgb2gray(grayImg2), 16);
+    regions1 = divide_in_regions(rgb2gray(grayImg1), fracture);
+    regions2 = divide_in_regions(rgb2gray(grayImg2), fracture);
     
     % Calculate velocities for regions
     [Vxs,Vys] = calc_velocity(regions1,regions2);
     
+    vecX = Vxs(round(current_R / fracture));
+    vecY = Vys(round(current_C / fracture));
+    
     % add velocities as vector to current 
-    current_R = current_R + Vxs(round(current_R / 16));
-    current_C = current_C + Vys(round(current_C / 16));
+    current_R = current_R + vecX;
+    current_C = current_C + vecY;
 
     % append result
     timestep = cat(3, current_R, current_C);
-    result = cat(1, result, timestep);
+    points = cat(1, points, timestep);
+    timestep = cat(3, vecX, vecY);
+    veccies = cat(1, veccies, timestep);
 end
 end

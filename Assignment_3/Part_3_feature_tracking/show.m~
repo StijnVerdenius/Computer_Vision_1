@@ -1,8 +1,0 @@
-function show(imgs, points)
-
-for i = 1:numel(imgs)
-   for 
-   imshow(imgs(i).data)
-end
-
-end

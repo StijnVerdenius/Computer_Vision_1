@@ -11,10 +11,10 @@ pingpong_imgs = read_directory(path1, '*', ".jpeg");
 % toy_imgs = read_directory(path2, '*', ".jpg");
 
 % track objects through video
-tracked_pingpong = tracking(pingpong_imgs);
+[points_pingpong, vectors_pingpong]  = tracking(pingpong_imgs);
 % tracked_toy = tracking(toy_imgs);
 
 % show video with points
-show(pingpong_imgs, tracked_pingpong)
+show(pingpong_imgs, points_pingpong, vectors_pingpong)
 % show(toy_imgs, tracked_toy)
 
