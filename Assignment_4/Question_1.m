@@ -2,8 +2,8 @@
 
 %Part 1
 
-[m,s] = keypoint_matching('left.jpg', 'right.jpg');
+[m,s] = keypoint_matching('boat1.pgm', 'boat2.pgm');
 
 %Part 2
 
-get_random_matchpoints('left.jpg', 'right.jpg')
+get_random_matchpoints('boat1.pgm', 'boat2.pgm');
