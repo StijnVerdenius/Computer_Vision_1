@@ -1,15 +1,14 @@
-I = single(imread('boat1.pgm'));
-
-% Before RANSAC
-[T, scores, k1, k2] = keypoint_matching('boat1.pgm','boat2.pgm');
+function [m1,m2,m3,m4,t1,t2] = RANSAC(img1_dir,img2_dir)
+[T, scores, k1, k2] = keypoint_matching(img1_dir,img2_dir);
 
 % % Repeat N times
 N = 5000;
-P = 10;
+P = 50;
 number = size(T,2); % Total number of points
-threshDist = 10;
+threshDist = 6;
 current_inlier_count = 0;
 current_params = zeros(1,6);
+
 for n = 1:N
     % Pick P matches at random from total set of matches T
     permutations = randperm(size(T,2));
@@ -37,8 +36,17 @@ for n = 1:N
      % Check if new count is better and if so, save params
      if inlier_count > current_inlier_count
         current_inlier_count = inlier_count;
-        current_params = transf_params
+        current_params = transf_params;
      end
 end
 
-compute_new_img(imread('boat1.pgm'), current_params);
+m1 = current_params(1);
+m2 = current_params(2);
+m3 = current_params(3);
+m4 = current_params(4);
+t1 = current_params(5);
+t2 = current_params(6);
+% compute_new_img(imread('boat2.pgm'), current_params);
+
+end
+
