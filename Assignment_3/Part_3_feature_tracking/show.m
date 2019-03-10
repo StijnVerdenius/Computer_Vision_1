@@ -13,19 +13,19 @@ for frame = 1:size(imgs, 1)
    % plot videoframe
    imshow(imgs(frame).data)
    
-   arrow_multiplication = 1;
+   arrow_multiplication = 75;
    
    % plot points
    hold on
    for point = 1:size(points, 2)
-       i = points(frame, point, 1);
-       j = points(frame, point, 2);
+       x = points(frame, point, 1);
+       y = points(frame, point, 2);
        u = vectors(frame, point, 1)*arrow_multiplication;
        v = vectors(frame, point, 2)*arrow_multiplication;
-       plot(j, i, 'r*');
-       quiver(j,i,u,v);
+       plot(x, y, 'r*');
+       quiver(x,y,u,v,'color',[0 0 1]);
    end
-   pause(1)
+   pause(0.75)
    hold off
 end
 
