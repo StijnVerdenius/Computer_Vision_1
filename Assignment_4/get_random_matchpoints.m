@@ -34,10 +34,10 @@ f2 = vl_plotframe(k2(:,m(2,subset)));
 set(f2,'color','y','linewidth',2) ;
 
 %plot lines joining matched features
-x1 = k1(1,m(1,subset)) ;
+x1 = k1(1,m(1,subset));
 x2 = k2(1,m(2,subset));
-y1 = k1(2,m(1,subset)) ;
-y2 = k2(2,m(2,subset)) ;
+y1 = k1(2,m(1,subset));
+y2 = k2(2,m(2,subset));
 
 f3 = line([x1 ; x2], [y1 ; y2]) ;
 set(f3,'linewidth', 2, 'color', 'r') ;
