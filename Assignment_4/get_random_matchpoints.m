@@ -1,9 +1,24 @@
 function [] = get_random_matchpoints(image1, image2)
 
-I1 = rgb2gray(imread(image1));
-I2 = rgb2gray(imread(image2));
-I2 = imresize(I2,size(I1));
+%Check if image is rgb and convert to gray if necessary
+if ndims(imread(image1)) == 3
+    I1 = rgb2gray(imread(image1));
+else
+    I1 = imread(image1);
+end
+  
+if ndims(imread(image2)) == 3
+    I2 = rgb2gray(imread(image2));
+else
+    I2 = imread(image2);
+end   
 
+%resize images to be of equal dimensions if necessary
+if size(I1) ~= size(I2)
+    I2 = imresize(I2,size(I1));
+end
+
+%convert to singles
 I1 = im2single(I1);
 I2 = im2single(I2);
 
@@ -31,7 +46,7 @@ set(f1,'color','b','linewidth',3) ;
 %plot matched features on 2nd image 
 k2(1,:) = k2(1,:) + size(I1,2);
 f2 = vl_plotframe(k2(:,m(2,subset)));
-set(f2,'color','y','linewidth',2) ;
+set(f2,'color','g','linewidth',2) ;
 
 %plot lines joining matched features
 x1 = k1(1,m(1,subset));
