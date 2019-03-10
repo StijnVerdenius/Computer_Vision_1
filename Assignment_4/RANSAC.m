@@ -1,11 +1,11 @@
 I = single(imread('boat1.pgm'));
 
 % Before RANSAC
-[T, scores, k1, k2] = keypoint_matching('left.jpg', 'right.jpg');
+[T, scores, k1, k2] = keypoint_matching('boat1.pgm','boat2.pgm');
 
 % % Repeat N times
-N = 10000;
-P = 50;
+N = 5000;
+P = 10;
 number = size(T,2); % Total number of points
 threshDist = 10;
 current_inlier_count = 0;
@@ -41,4 +41,4 @@ for n = 1:N
      end
 end
 
-compute_new_img(imread('left.jpg'), current_params);
+compute_new_img(imread('boat1.pgm'), current_params);
