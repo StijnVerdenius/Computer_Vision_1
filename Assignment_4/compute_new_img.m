@@ -11,9 +11,9 @@ t2 = params(6);
 new_points = zeros(height,width, 2);
 for h = 1:height
     for w = 1:width
-        new_coord =  [m1 m2; m3 m4]*[w h]' + [t1 t2]';
-        new_points(h,w,1) = new_coord(2);  
-        new_points(h,w,2) = new_coord(1);
+        new_coord =  [m1 m2; m3 m4]*[h w]' + [t1 t2]';
+        new_points(h,w,1) = new_coord(1);  
+        new_points(h,w,2) = new_coord(2);
     end
 end
 
@@ -30,7 +30,6 @@ for h = 1:height
         new_point_h = ceil(new_points(h,w,1) - min_h + 1);
         new_point_w = ceil(new_points(h,w,2) - min_w + 1);
         new_img(new_point_h,new_point_w) = img(h,w);
-        
     end
 end
 
