@@ -1,6 +1,6 @@
 function [] = get_random_matchpoints(image1, image2)
 
-%Check if image is rgb and convert to gray if necessary
+% %Check if image is rgb and convert to gray if necessary
 if ndims(imread(image1)) == 3
     I1 = rgb2gray(imread(image1));
 else
@@ -21,13 +21,10 @@ end
 %convert to singles
 I1 = im2single(I1);
 I2 = im2single(I2);
+% 
+% %Get frames with features and frames with matching features
 
-%Get frames with features
-[k1,d1] = vl_sift(I1);
-[k2,d2] = vl_sift(I2);
-
-%Get frames with matching features
-[m, scores] = vl_ubcmatch(d1, d2);
+[m, scores, k1, k2] = keypoint_matching(image1, image2);
 
 %Get random subset of frames with matching features
 permutations = randperm(size(m,2));
