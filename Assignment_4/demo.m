@@ -13,4 +13,4 @@ get_random_matchpoints('boat1.pgm', 'boat2.pgm');
 current_params = [m1,m2,m3,m4,t1,t2];
 
 % Show transform of img1 to img2
-compute_new_img(imread('boat1.pgm'), current_params);
+compute_new_img(imread('boat2.pgm'), current_params);
