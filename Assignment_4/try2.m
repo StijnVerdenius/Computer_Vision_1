@@ -20,9 +20,11 @@ best_matches = matches(1:20);
 X2 = k2(2, point);
 
 newimage = [im1(:, 1:X1), im2_transformed(:, X2:end)];
-
 figure(1)
-imshowpair(im1(:, 1:X1), im2_transformed(:, X2:end) , 'montage')
+imshow(newimage);
+
+% figure(1)
+% imshowpair(im1(:, 1:X1), im2_transformed(:, X2:end) , 'montage')
 
 % %plot matched features on 1st image
 % f1 = vl_plotframe(k1(:,best_matches));
