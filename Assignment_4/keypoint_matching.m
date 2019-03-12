@@ -14,9 +14,9 @@ else
 end   
 
 %resize images to be of equal dimensions if necessary
-if size(I1) ~= size(I2)
-    I2 = imresize(I2,size(I1));
-end
+% if size(I1) ~= size(I2)
+%     I2 = imresize(I2,size(I1));
+% end
 
 %convert to singles
 I1 = im2single(I1);
