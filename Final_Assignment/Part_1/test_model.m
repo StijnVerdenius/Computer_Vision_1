@@ -1,7 +1,8 @@
-function acc = test_model(model, imgs, labels)
+function acc = test_model(model, imgs, labels) % EX. 2.6
+% trains a SVM model with bows representations. (NOT FINISHED)
 
-% function will hold testing functionality
-
+% TODO: entire function
+% TODO: download and learn LIBLINEAR-SVM (see assignment)
 acc =0;
 
 end
