@@ -18,7 +18,7 @@ for n = 1:N
     [x,x_,y,y_] = get_points_from_matches(T,k1,k2,subset);
     
     % Construct a matrix A and vector b using the P pairs of points
-    [A,b] = build_A_b(x, x_, y, y_);
+    [A,b] = build_A_b(x', x_', y', y_');
     
     % Solving the equation Ax = b 
     transf_params = pinv(A)*b;
