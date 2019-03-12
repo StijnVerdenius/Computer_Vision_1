@@ -13,7 +13,7 @@ function [imgs, labels] = load_data(set, percentage_to_load, random, from_index,
 % - which classes
 % - reshaped (bool) if true then it returns it H x W x Ch x N, if false then it returns it N x (W*H*Ch)
 
-% some input assertions
+% some input assertions  
 assert (set == "train" || set == "test");
 assert (from_index >= 1);
 assert (percentage_to_load >= 0 && percentage_to_load <= 1);
