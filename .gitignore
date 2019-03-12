@@ -4,6 +4,4 @@ test.mat
 ./test.mat
 */train.mat
 */test.mat
-./stl10_matlab/*
-*/stl10_matlab/*
-stl10_matlab/*
+
