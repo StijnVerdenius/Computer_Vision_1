@@ -43,9 +43,9 @@ else
 end
 
 % select data from indices
-trimmed.X = trimmed.X(indices, :);
+trimmed.X = transpose(trimmed.X(indices, :));
 if (reshaped)
-    imgs = reshape(transpose(trimmed.X), 96, 96, 3, numel(indices));
+    imgs = reshape(trimmed.X, 96, 96, 3, numel(indices));
 else
     imgs = trimmed.X;
 end
