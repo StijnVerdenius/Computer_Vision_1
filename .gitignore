@@ -1,0 +1,12 @@
+train.mat
+test.mat
+./train.mat
+./test.mat
+*/train.mat
+*/test.mat
+
+# Windows default autosave extension
+*.asv
+
+# OSX / *nix default autosave extension
+*.m~

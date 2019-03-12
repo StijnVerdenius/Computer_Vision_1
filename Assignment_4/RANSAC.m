@@ -2,10 +2,10 @@ function [m1,m2,m3,m4,t1,t2] = RANSAC(img1_dir,img2_dir)
 [T, scores, k1, k2] = keypoint_matching(img1_dir,img2_dir);
 
 % % Repeat N times
-N = 5000;
-P = 50;
+N = 100000;
+P = 20;
 number = size(T,2); % Total number of points
-threshDist = 6;
+threshDist = 10;
 current_inlier_count = 0;
 current_params = zeros(1,6);
 
