@@ -19,7 +19,7 @@ assert (from_index >= 1);
 assert (percentage_to_load >= 0 && percentage_to_load <= 1);
 
 % get file
-raw = load("./data/stl10_matlab/"+set+".mat");
+raw = load("./Part_1/data/stl10_matlab/"+set+".mat");
 
 % get rid of unwanted classes
 trimmed = remove_unwanted_classes(raw, classes);
