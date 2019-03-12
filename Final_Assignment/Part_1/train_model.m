@@ -1,15 +1,8 @@
-function some_model = train_model(imgs, labels)
+function models = train_model(bows, labels) % EX. 2.5
+% trains a SVM model with bows representations. (NOT FINISHED)
 
-% convert to colour spaces
-[gray_imgs, ~, opponent_imgs] = getColorSpaces(imgs);
+% TODO: entire function
+% TODO: download and learn LIBLINEAR-SVM (see assignment)
 
-figure(1)
-imshow(opponent_imgs(:,:,:,3));
-figure(2)
-imshow(gray_imgs(:,:,:,3));
-
-% todo
-
-some_model = 0; % dummy
 
 end

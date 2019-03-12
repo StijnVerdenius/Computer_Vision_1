@@ -2,8 +2,8 @@ function [imgs, labels] = load_data(set, percentage_to_load, random, from_index,
 % function loads data into images and labels
 
 
-
 % IMPORTANT: put data in folder stl10_matlab
+
 
 %input:
 % - setname
@@ -53,4 +53,4 @@ labels = trimmed.y(indices);
 
 end
 
-% todo: add id to images and labels so we can make sure they match?
+% TODO: maybe add id to images and labels so we can make sure they match?
