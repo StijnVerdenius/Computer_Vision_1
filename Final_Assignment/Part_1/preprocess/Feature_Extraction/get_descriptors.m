@@ -14,7 +14,7 @@ descriptors = [];
 
 for i =1:number_of_images
     
-    current_img = imgs(:, :, :, i);
+    current_img = gray_imgs(:, :, :, i); % TODO: gray, opponent, normal and/or normalized??
     current_descriptors = sift_descriptor_extraction(current_img);
     
     % TODO: make sure it is retracable to which image certain descriptors belonged too, i

@@ -3,6 +3,8 @@
 close all
 clear all
 
+% TODO: some prints to inform user whats happening
+
 %% extract data for vocabulary
 
 [vocab_building_imgs, ~] = load_data("train" , 1.0, false, 1, ["all"], true);
@@ -16,8 +18,16 @@ vocab = create_vocabulary(vocab_building_imgs, random_number);
 
 %% extract data for training and testing
 
-[train_im, train_label] = load_data("train" , 1.0, false, 1, ["airplane", "bird", "ship", "horse", "car"], true);
-[test_im, test_label] = load_data("test" , 1.0, false, 1, ["airplane", "bird", "ship", "horse", "car"], true);
+wanted_classes = ["airplane", "bird", "ship", "horse", "car"];
+
+% change the following for different data selection
+start_index = 1;
+percentage_of_data = 1.0;
+random_selection = false;
+two_dimensional_pictures = true;
+
+[train_im, train_label] = load_data("train" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
+[test_im, test_label] = load_data("test" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
 
 
 %% convert to bag of words
