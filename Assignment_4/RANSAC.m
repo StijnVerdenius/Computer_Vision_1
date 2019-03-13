@@ -1,11 +1,11 @@
-function [m1,m2,m3,m4,t1,t2] = RANSAC(img1_dir,img2_dir)
+function [m1,m2,m3,m4,t1,t2,count, tries] = RANSAC(img1_dir,img2_dir)
 [T, scores, k1, k2] = keypoint_matching(img1_dir,img2_dir);
 
 % % Repeat N times
-N = 100;
-P = 2;
+N = 10000;
+P = 20;
 number = size(T,2); % Total number of points
-threshDist = 20;
+threshDist = 10;
 current_inlier_count = 0;
 current_params = zeros(1,6);
 count = 0;
@@ -41,40 +41,35 @@ for n = 1:N
         tries = n;
      end
      
-     [new_img] = compute_new_img(imread(img1_dir), current_params);
+%      [new_img] = compute_new_img(imread(img1_dir), current_params);
     
-     % Draw transformation
-     figure(1)
-
-    %plot images side by side
-    imshowpair(imread(img1_dir), single(new_img) , 'montage')
-
-    %plot matched features on 1st image
-    f1 = vl_plotframe(k1(:,T(1,subset)));
-    set(f1,'color','b','linewidth',3) ;
-
-    %plot matched features on 2nd image 
-    k2(1,:) = k2(1,:) + size(imread(img1_dir),2);
-    f2 = vl_plotframe(k2(:,T(2,subset)));
-    set(f2,'color','g','linewidth',2) ;
-
-    %plot lines joining matched features
-    x1 = k1(1,T(1,subset));
-    x2 = k2(1,T(2,subset));
-    y1 = k1(2,T(1,subset));
-    y2 = k2(2,T(2,subset));
-
-    f3 = line([x1 ; x2], [y1 ; y2]) ;
-    set(f3,'linewidth', 2, 'color', 'r') ;
+%      % Draw transformation
+%      figure(1)
+% 
+%     %plot images side by sidecount
+%     imshowpair(imread(img1_dir), single(new_img) , 'montage')
+% 
+%     %plot matched features on 1st image
+%     f1 = vl_plotframe(k1(:,T(1,subset)));
+%     set(f1,'color','b','linewidth',3) ;
+% 
+%     %plot matched features on 2nd image 
+%     k2(1,:) = k2(1,:) + size(imread(img1_dir),2);
+%     f2 = vl_plotframe(k2(:,T(2,subset)));
+%     set(f2,'color','g','linewidth',2) ;
+% 
+%     %plot lines joining matched features
+%     x1 = k1(1,T(1,subset));
+%     x2 = k2(1,T(2,subset));
+%     y1 = k1(2,T(1,subset));
+%     y2 = k2(2,T(2,subset));
+% 
+%     f3 = line([x1 ; x2], [y1 ; y2]) ;
+%     set(f3,'linewidth', 2, 'color', 'r') ;
 
 end
 
 
-display("Changed this many times:");
-display(count);
-
-display("Took this many tries:");
-display(tries);
 
 m1 = current_params(1);
 m2 = current_params(2);
