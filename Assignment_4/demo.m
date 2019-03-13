@@ -11,11 +11,8 @@
 % Compute parameters of img1 to img2 to transform
 
 % OUR VERSION
-IMG1_DIR = 'boat2.pgm';
-IMG2_DIR = 'boat1.pgm';
-result = stitch(IMG1_DIR, IMG2_DIR);
-imshow(result);
-quit
+IMG1_DIR = 'left.jpg';
+IMG2_DIR = 'right.jpg';
 
 counts = zeros(1);
 tries = zeros(1);
@@ -46,5 +43,9 @@ title('Our transformation')
 subplot(1,2,2)
 imshow(transformed_image_matlab);
 title('Matlab transformation')  
+
+result = stitch(IMG1_DIR, IMG2_DIR);
+imshow(result);
+
 
 display('over');
