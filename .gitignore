@@ -5,6 +5,9 @@ test.mat
 */train.mat
 */test.mat
 
+*.mat
+..mat
+
 # Windows default autosave extension
 *.asv
 

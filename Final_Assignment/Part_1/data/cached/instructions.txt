@@ -1,0 +1,2 @@
+This folder is for caching BoW representations, vocabularies and perhaps even trained models
+> no need to do anything, just don't delete it

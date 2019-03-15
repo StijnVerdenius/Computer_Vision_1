@@ -3,7 +3,7 @@ function descriptors = sift_descriptor_extraction(img)
 
 % TODO: include these somehow, not very clear from assignment
 gray_img = ConvertColorSpace(img, 'gray');
-[~] = ConvertColorSpace(img, 'opponent');
+% [~] = ConvertColorSpace(img, 'opponent');
 
 
 [~, descriptors] = vl_dsift(im2single(gray_img));
