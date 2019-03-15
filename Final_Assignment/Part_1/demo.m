@@ -12,7 +12,7 @@ clear all
 
 %% create vocabulary 
 
-random_number = 26;
+random_number = 400; % According to assignment either 400, 1000 or 4000
 vocab = create_vocabulary(vocab_building_imgs, random_number);
 
 

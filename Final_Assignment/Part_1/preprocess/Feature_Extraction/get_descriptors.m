@@ -1,5 +1,7 @@
 function descriptors = get_descriptors(imgs) % (EX. 2.1)
-% generates descriptors for multiple images (NOT FINISHED)
+% generates descriptors for multiple images 
+
+% TODO: check after implementing opponent and rgb sift that it still works
 
 batch_dimension = numel(size(imgs));
 number_of_images = size(imgs, batch_dimension);
@@ -7,24 +9,15 @@ if (batch_dimension == 2)
     imgs = reshape(imgs, 96, 96, 3, number_of_images);
 end
 
-% TODO: include these somehow, not very clear from assignment
-[gray_imgs, ~, opponent_imgs] = getColorSpaces(imgs);
+test_descriptor = sift_descriptor_extraction(imgs(:,:,:,1));
 
-descriptors = [];
+descriptors = zeros(128, size(test_descriptor, 2), number_of_images);
 
 for i =1:number_of_images
     
-    current_gray_img = gray_imgs(:, :, :, i); % TODO: gray, opponent, normal and/or normalized??
     current_img = imgs(:, :, :, i);
-    current_opponent_img = opponent_imgs(:, :, :, i);
-    current_descriptors = sift_descriptor_extraction(current_img, current_opponent_img ,current_gray_img);
-    
-    size(current_descriptors)
-    
-    % TODO: make sure it is retracable to which image certain descriptors belonged too, i
-    % don't think it is now. If we can't trace them back to a label we
-    % cannot train on them.
-%     descriptors = cat(4, descriptors, current_descriptors);
+    current_descriptors = sift_descriptor_extraction(current_img);
+    descriptors(:,:,i) = current_descriptors;
     
 end
 
