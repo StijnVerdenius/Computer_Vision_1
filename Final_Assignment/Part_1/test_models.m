@@ -1,4 +1,4 @@
-function MAP = test_models(models, bows, actual_labels, classes) % EX. 2.6 --- is this the prefictor part?
+function [MAP, index] = test_models(models, bows, actual_labels, classes) % EX. 2.6 --- is this the prefictor part?
 % trains a SVM model with bows representations. (NOT FINISHED)
 
 disp("started evaluating testset");
@@ -22,12 +22,7 @@ for m = 1:length(models)
     pred_label(pred_label == 1) = classes(m);
     
     %matix - rows = model, columns = image scores from selected model
-    classification_score(m,:) = posterior(:,2).';
-    
-    
-    %get sorted images and keep track of index
-    [sorted_classification_score , index ] = sort(classification_score(m),'ascend');
-    
+    classification_score(m,:) = posterior(:,2).';    
     
     score = 0;
     cumulative = 0;
@@ -48,10 +43,8 @@ end
 MAP = mean(AP); 
 
 
-
-
-
-
+%get sorted images and keep track of index
+[sorted_classification_score , index ] = sort(classification_score, 2 , 'descend');
 
 
 

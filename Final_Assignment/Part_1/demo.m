@@ -50,10 +50,11 @@ models = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 
 %% test model
 
-MAP = test_models(models, BoW_test_imgs, test_label, classes); % (EX. 1.2) MAP = mean average precision
+[MAP, best_image_index] = test_models(models, BoW_test_imgs, test_label, classes); % (EX. 1.2) MAP = mean average precision
 % disp("Accuracy is " + accurracy + "%");
 disp("Mean Average Precision is " + MAP);
 
+visualize_images(test_im, best_image_index); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
 
 %% bonus 1 
 % (EX. 4.~)
