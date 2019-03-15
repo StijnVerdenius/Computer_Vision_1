@@ -1,10 +1,14 @@
-function amodel, bmodel, smodel, hmodel, cmodel = train_models(bows, labels, classes)
+function models = train_models(bows, labels, classes)
 
 disp("started training svms");
 
-for elm
+models = [];
 
-
+for c = 1:length(classes)
+    model = train_model(bows, labels, classes(c));
+    models = [models; model];
+end
+    
 disp("finished training svms");
 
 

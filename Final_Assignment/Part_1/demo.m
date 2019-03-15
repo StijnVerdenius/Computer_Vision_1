@@ -25,7 +25,7 @@ wanted_classes = ["airplane", "bird", "ship", "horse", "car"];
 
 % change the following for different data selection
 start_index = 1;
-percentage_of_data = 1.0;
+percentage_of_data = 0.05;
 random_selection = false;
 two_dimensional_pictures = true;
 
@@ -41,9 +41,11 @@ BoW_train_imgs = bagging_images(train_im, vocab, loading_if_possible, saving_whe
 BoW_test_imgs = bagging_images(test_im, vocab, loading_if_possible, saving_when_done, "test");
 
 
-%% train model
+%% train models
 
-model = train_model(BoW_train_imgs, train_label); % (EX. 1.1)
+classes = [1, 2, 9, 7, 3]; % ["airplanes", "birds", "ships", "horses" , "cars"]
+
+model = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 
 
 %% test model
