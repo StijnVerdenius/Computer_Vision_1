@@ -3,16 +3,18 @@
 close all
 clear all
 
+vl_setup()
+
 % TODO: some prints to inform user whats happening
 
 %% extract data for vocabulary
 
-[vocab_building_imgs, ~] = load_data("train" , 1.0, false, 1, ["all"], true);
+[vocab_building_imgs, ~] = load_data("train" , 0.05, false, 1, ["all"], true);
 
 
 %% create vocabulary
 
-random_number = 400; % According to assignment either 400, 1000 or 4000
+random_number = 50; % According to assignment either 400, 1000 or 4000
 vocab = create_vocabulary(vocab_building_imgs, random_number);
 
 

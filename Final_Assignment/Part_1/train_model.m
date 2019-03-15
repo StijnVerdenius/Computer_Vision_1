@@ -4,6 +4,7 @@ function models = train_model(bows, labels) % EX. 2.5
 % TODO: entire function
 % TODO: download and learn LIBLINEAR-SVM (see assignment)
 
+disp("started training svms");
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% THIS IS IF WE USE LIBLINEAR
 
@@ -41,5 +42,8 @@ function models = train_model(bows, labels) % EX. 2.5
 % 
 % % ClassNames — Distinguishes between the negative and positive classes, or specifies which classes to include in the data. The negative class is the first element (or row of a character array), e.g., 'negClass', and the positive class is the second element (or row of a character array), e.g., 'posClass'. ClassNames must be the same data type as Y. 
 
- model = fitcsvm(bows, labels);
+ model = fitcsvm(bows, labels); % we need 5 of these, or not?
+ 
+ disp("finished training svms");
+
 end

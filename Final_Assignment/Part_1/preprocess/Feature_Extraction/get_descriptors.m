@@ -22,6 +22,8 @@ for i =1:number_of_images
         
 end
 
+descriptors = im2single(descriptors);
+
 disp("finished generating descriptors");
 
 end
