@@ -1,4 +1,4 @@
-function [imgs, labels] = load_data(set, percentage_to_load, random, from_index, classes, reshaped)
+function [imgs, labels] = load_image_data(set, percentage_to_load, random, from_index, classes, reshaped)
 % function loads data into images and labels
 
 

@@ -13,5 +13,4 @@ acc =0;
 
 disp("finished evaluating testset");
 
-
 end

@@ -9,7 +9,7 @@ vl_setup()
 
 %% extract data for vocabulary
 
-[vocab_building_imgs, ~] = load_data("train" , 0.05, false, 1, ["all"], true);
+[vocab_building_imgs, ~] = load_image_data("train" , 0.05, false, 1, ["all"], true);
 
 
 %% create vocabulary
@@ -28,14 +28,14 @@ percentage_of_data = 1.0;
 random_selection = false;
 two_dimensional_pictures = true;
 
-[train_im, train_label] = load_data("train" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
-[test_im, test_label] = load_data("test" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
+[train_im, train_label] = load_image_data("train" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
+[test_im, test_label] = load_image_data("test" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
 
 
 %% convert to bag of words
 
-BoW_train_imgs = bag_of_words(train_im, vocab);
-BoW_test_imgs = bag_of_words(test_im, vocab);
+BoW_train_imgs = bagging_images(train_im, vocab);
+BoW_test_imgs = bagging_images(test_im, vocab);
 
 
 %% train model

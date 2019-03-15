@@ -12,7 +12,7 @@ if (batch_dimension == 2)
     imgs = reshape(imgs, 96, 96, 3, number_of_images);
 end
 
-bow_imgs = zeros(vocab_size,number_of_images);
+bow_imgs = zeros(vocab_size,number_of_images, 'int16');
 
 for i = 1:number_of_images
     bow_imgs(:,i) = bag_of_words(imgs(i));
