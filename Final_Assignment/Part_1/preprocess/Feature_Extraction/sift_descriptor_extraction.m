@@ -5,8 +5,9 @@ function descriptors = sift_descriptor_extraction(img)
 gray_img = ConvertColorSpace(img, 'gray'); % transform to grayscale
 % [~] = ConvertColorSpace(img, 'opponent');
 
+% TODO: presmoothing???
 
-[~, descriptors] = vl_dsift(im2single(gray_img)); % get descriptors
+[~, descriptors] = vl_dsift(im2single(gray_img)); % TODO: add following options and experiment: "step", 3, "size", 9, "fast", true ); % get descriptors
 
 % TODO: tune vldsift parameters
 % TODO: support rgb-sift and opponent-sift.

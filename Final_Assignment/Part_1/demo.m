@@ -8,7 +8,7 @@ vl_setup()
 
 %% extract data for vocabulary
 
-[vocab_building_imgs, ~] = load_image_data("train" , 0.05, false, 1, ["all"], true); % get all classes from trainset to generate vocabulary
+[vocab_building_imgs, ~] = load_image_data("train" , 0.5, false, 1, ["all"], true); % get all classes from trainset to generate vocabulary
 
 
 %% create vocabulary
