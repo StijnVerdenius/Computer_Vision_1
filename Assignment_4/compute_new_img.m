@@ -28,14 +28,13 @@ if ndims(img) == 3
 else
     new_img = zeros(1,1,1);
 end
-    
+        
 [height2,width2, chs] = size(new_points);
 for h = 1:height2
     for w = 1:width2
         new_point_w = floor(new_points(h,w,1) - min_w + 1);
         new_point_h = floor(new_points(h,w,2) - min_h + 1);
-        new_img(new_point_h,new_point_w,:) = img(h,w,:);
-        
+        new_img(new_point_h,new_point_w,:) = img(h,w,:);       
     end
 end
 
