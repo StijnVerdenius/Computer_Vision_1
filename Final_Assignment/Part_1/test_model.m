@@ -3,8 +3,6 @@ function acc = test_model(model, imgs, labels) % EX. 2.6 --- is this the prefict
 
 disp("started evaluating testset");
 
-classes = ["airplanes", "birds", "ships", "horses" , "cars"] %1, 2, 9, 7, 3
-
 for elm = classes
     SVMmodel = fitPosterior(model,X,Y); %this fits a score-to-posterior-probability transformation function to the scores
     [label,score] = predict(SVMModel,newX);

@@ -1,4 +1,4 @@
-function bow_imgs = bagging_images(imgs, vocab, load_from_file, save_to_file, set_name)
+    function bow_imgs = bagging_images(imgs, vocab, load_from_file, save_to_file, set_name)
 % converts many images to bag of words descriptor given a vocabulary (NOT FINISHED)
 
 disp("started finding bag of words representations");

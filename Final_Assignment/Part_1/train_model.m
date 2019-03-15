@@ -37,7 +37,7 @@ function model = train_model(bows, labels, class) % EX. 2.5
 % 
 % % ClassNames — Distinguishes between the negative and positive classes, or specifies which classes to include in the data. The negative class is the first element (or row of a character array), e.g., 'negClass', and the positive class is the second element (or row of a character array), e.g., 'posClass'. ClassNames must be the same data type as Y. 
 
- model = fitcsvm(bows, labels, "ClassNames", {class}); % we need 5 of these, or not? - Yes -> airplanes, birds, ships, horses and cars
+ model = fitcsvm(double(bows.'), labels, "ClassNames", class); % we need 5 of these, or not? - Yes -> airplanes, birds, ships, horses and cars
  
 % % bows — Matrix of predictor data, where each row is one observation, and each column is one predictor.
 % 
