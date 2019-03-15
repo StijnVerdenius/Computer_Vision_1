@@ -1,9 +1,8 @@
 function descriptors_concat = sift_descriptor_extraction(img, method)
 % transforms image to sift descriptor (gray-scale only) (NOT FINISHED)
 
-descriptors = cell(7,1);
+descriptors = cell(1,7);
 
-% TODO: include these somehow, not very clear from assignment
 img_gray = ConvertColorSpace(img, 'gray'); % transform to grayscale
 img_opp = ConvertColorSpace(img, 'opponent');
 
@@ -23,15 +22,12 @@ elseif (strcmp( method, "keypoint"))
     end
 else
     error("unrecognized sift option: "+ method);
+end
 
 descriptors_concat = cell2mat(descriptors);
     
 % TODO: tune vldsift parameters
-% TODO: support rgb-sift and opponent-sift.
 % TODO: check if the right descriptors are being returned.
 % TODO: do we need the frames?
-
-% [R, G, B] = getColorChannels(img);
-% [O_1, O_2, O_3] = getColorChannels(opponent_img);
 
 end
