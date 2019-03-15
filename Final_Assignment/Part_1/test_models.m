@@ -7,7 +7,7 @@ for m = length(models)
 %     model = fitPosterior(models{m},double(bows.'), labels); %this fits a score-to-posterior-probability transformation function to the scores
     [label, mAP] = predict(models{m},double(bows.'));
     
-    scores = zeros(length(lables),1);
+    scores = zeros(length(labels),1);
     for i = length(labels)
         score = strcmp(labels(i),label);
         scores(i) = score;

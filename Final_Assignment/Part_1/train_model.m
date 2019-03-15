@@ -4,7 +4,7 @@ function model = train_model(bows, labels, class) % EX. 2.5
 % TODO: entire function
 % TODO: download and learn LIBLINEAR-SVM (see assignment)
 
-disp("started training svms");
+disp("started training svms for class " + class);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% THIS IS IF WE USE LIBLINEAR
 
