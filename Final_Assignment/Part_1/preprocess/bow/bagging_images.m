@@ -1,4 +1,4 @@
-function bow_imgs = bagging_images(imgs, vocab, load_from_file, save_to_file, set_name)
+function bow_imgs = bagging_images(imgs, vocab, load_from_file, save_to_file, set_name, sift_method)
 % converts many images to bag of words descriptor given a vocabulary
 
 disp("started finding bag of words representations");
@@ -28,7 +28,7 @@ else
     
     % generate bow-representation for each image
     for i = 1:number_of_images
-        bow_imgs(:,i) = bag_of_words(imgs(:,:,:,i), vocab);
+        bow_imgs(:,i) = bag_of_words(imgs(:,:,:,i), vocab, sift_method);
     end
     
     % save output to cache if requested

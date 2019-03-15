@@ -13,7 +13,7 @@ if (batch_dimension == 2)
 end
 
 % get initial descriptor in order to see its shape
-test_descriptor = sift_descriptor_extraction(imgs(:,:,:,1));
+test_descriptor = sift_descriptor_extraction(imgs(:,:,:,1), "dense");
 
 % initialize output shape
 descriptors = zeros(128, size(test_descriptor, 2), number_of_images, 'uint8');
@@ -21,7 +21,7 @@ descriptors = zeros(128, size(test_descriptor, 2), number_of_images, 'uint8');
 % get sift descriptors for each image
 for i =1:number_of_images
     current_img = imgs(:, :, :, i);
-    current_descriptors = sift_descriptor_extraction(current_img);
+    current_descriptors = sift_descriptor_extraction(current_img, "dense");
     descriptors(:,:,i) = current_descriptors;
 end
 
