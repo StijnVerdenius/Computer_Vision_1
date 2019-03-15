@@ -4,7 +4,7 @@ function model = train_model(bows, labels, class) % EX. 2.5
 % TODO: entire function
 % TODO: download and learn LIBLINEAR-SVM (see assignment)
 
-% disp("started training svms");
+disp("started training svms for class " + class);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% THIS IS IF WE USE LIBLINEAR
 
@@ -29,22 +29,30 @@ function model = train_model(bows, labels, class) % EX. 2.5
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SVM alternative below
 
-% 
-% model = fitcsvm(bows,labels,'KernelFunction','rbf','Standardize',true,'ClassNames',{'negClass','posClass'});
-% % KernelFunction — The default value is 'linear' for two-class learning, which separates the data by a hyperplane. The value 'gaussian' (or 'rbf') is the default for one-class learning, and specifies to use the Gaussian (or radial basis function) kernel. 
-% 
-% % Standardize — Flag indicating whether we should standardize the predictors before training the classifier.
-% 
-% % ClassNames — Distinguishes between the negative and positive classes, or specifies which classes to include in the data. The negative class is the first element (or row of a character array), e.g., 'negClass', and the positive class is the second element (or row of a character array), e.g., 'posClass'. ClassNames must be the same data type as Y. 
 
- model = fitcsvm(double(bows.'), labels, "ClassNames", class); % we need 5 of these, or not? - Yes -> airplanes, birds, ships, horses and cars
+% Create binary classes for each classifier
+new_labels = zeros(length(labels),1);
+
+for i = 1:numel(labels) 
+    current_label = strcmp(labels(i),class); 
+    new_labels(i) = current_label;
+end
+
+%train binary SVM 
+model = fitcsvm(double(bows.'),[new_labels],'ClassNames',[false true],'Standardize',true,'KernelFunction','rbf','BoxConstraint',1);
+model = fitPosterior(compact(model),double(bows.'), [new_labels]); %this fits a score-to-posterior-probability transformation function to the scores
+
+
+
+%  model = fitcsvm(double(bows.'), labels, "ClassNames", class); % we need 5 of these, or not? - Yes -> airplanes, birds, ships, horses and car
+ 
  
 % % bows — Matrix of predictor data, where each row is one observation, and each column is one predictor.
 % 
 % % labels — Array of class labels with each row corresponding to the value of the corresponding row in Bows.
-% 
+
  
  
- disp("finished training svms");
+%  disp("finished training svms");
 
 end
