@@ -19,7 +19,7 @@ for i =1:number_of_images
     current_img = imgs(:, :, :, i);
     current_descriptors = sift_descriptor_extraction(current_img);
     descriptors(:,:,i) = current_descriptors;
-    
+        
 end
 
 disp("finished generating descriptors");
