@@ -5,7 +5,6 @@ close all
 clear all
 vl_setup()
 
-
 %% extract data for vocabulary
 
 [vocab_building_imgs, ~] = load_image_data("train" , 0.05, false, 1, ["all"], true);
@@ -35,7 +34,7 @@ two_dimensional_pictures = true;
 
 %% convert to bag of words
 
-loading_if_possible = true;
+loading_if_possible = false;
 saving_when_done = true;
 BoW_train_imgs = bagging_images(train_im, vocab, loading_if_possible, saving_when_done, "train");
 BoW_test_imgs = bagging_images(test_im, vocab, loading_if_possible, saving_when_done, "test");
