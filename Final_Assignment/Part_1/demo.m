@@ -1,19 +1,22 @@
 %% main file for hand-in
 
+% prepare setup
 close all
 clear all
+vl_setup()
 
-% TODO: some prints to inform user whats happening
 
 %% extract data for vocabulary
 
-[vocab_building_imgs, ~] = load_data("train" , 1.0, false, 1, ["all"], true);
+[vocab_building_imgs, ~] = load_image_data("train" , 0.05, false, 1, ["all"], true);
 
 
-%% create vocabulary 
+%% create vocabulary
 
-random_number = 26;
-vocab = create_vocabulary(vocab_building_imgs, random_number);
+random_number = 50; % According to assignment either 400, 1000 or 4000
+loading_if_possible = true;
+saving_when_done = true;
+vocab = create_vocabulary(vocab_building_imgs, random_number, loading_if_possible, saving_when_done);
 
 
 %% extract data for training and testing
@@ -22,23 +25,27 @@ wanted_classes = ["airplane", "bird", "ship", "horse", "car"];
 
 % change the following for different data selection
 start_index = 1;
-percentage_of_data = 1.0;
+percentage_of_data = 0.05;
 random_selection = false;
 two_dimensional_pictures = true;
 
-[train_im, train_label] = load_data("train" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
-[test_im, test_label] = load_data("test" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
+[train_im, train_label] = load_image_data("train" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
+[test_im, test_label] = load_image_data("test" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
 
 
 %% convert to bag of words
 
-BoW_train_imgs = bag_of_words(train_im, vocab);
-BoW_test_imgs = bag_of_words(test_im, vocab);
+loading_if_possible = true;
+saving_when_done = true;
+BoW_train_imgs = bagging_images(train_im, vocab, loading_if_possible, saving_when_done, "train");
+BoW_test_imgs = bagging_images(test_im, vocab, loading_if_possible, saving_when_done, "test");
 
 
-%% train model
+%% train models
 
-model = train_model(BoW_train_imgs, train_label); % (EX. 1.1)
+classes = [1, 2, 9, 7, 3]; % ["airplanes", "birds", "ships", "horses" , "cars"]
+
+model = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 
 
 %% test model
