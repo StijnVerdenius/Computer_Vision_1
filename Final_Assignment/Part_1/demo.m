@@ -7,12 +7,12 @@ vl_setup()
 
 %% extract data for vocabulary
 
-[vocab_building_imgs, ~] = load_image_data("train" , 0.05, true, 1, ["all"], true); % get all classes from trainset to generate vocabulary
+[vocab_building_imgs, ~] = load_image_data("train" , 0.1, true, 1, ["all"], true); % get all classes from trainset to generate vocabulary
 
 
 %% create vocabulary
 
-vocabulary_size = 4000;                    % According to assignment either 400, 1000 or 4000
+vocabulary_size = 100;                    % According to assignment either 400, 1000 or 4000
 loading_vocab_if_possible = false;          % defines whether vocabulary will be loaded from cache
 saving_when_done = true;                   % defines whether it will be cached after generating, given its not loaded
 vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done); % creates vocabulary
