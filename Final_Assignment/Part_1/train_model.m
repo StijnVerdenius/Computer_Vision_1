@@ -18,7 +18,7 @@ end
 
 %train binary SVM 
 % model = fitcsvm(double(bows.'),[new_labels],'ClassNames',[false true],'Standardize',true,'KernelFunction','rbf','BoxConstraint',1);
-model = fitcsvm(double(bows.'),[new_labels]);
+model = fitcsvm(double(bows.'),[new_labels],'ClassNames',[0 1]);
 
 %this fits a score-to-posterior-probability transformation function to the scores
 % model = fitSVMPosterior(compact(model),double(bows.'), [new_labels]);
