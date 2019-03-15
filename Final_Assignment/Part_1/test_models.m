@@ -1,26 +1,31 @@
-function acc = test_models(models, bows, labels) % EX. 2.6 --- is this the prefictor part?
+function MAP = test_models(models, bows, labels, classes) % EX. 2.6 --- is this the prefictor part?
 % trains a SVM model with bows representations. (NOT FINISHED)
 
 disp("started evaluating testset");
 
+%Average Precisions
+AP = zeros(length(models),1);
+
 for m = length(models)
 %     model = fitPosterior(models{m},double(bows.'), labels); %this fits a score-to-posterior-probability transformation function to the scores
-    [label, mAP] = predict(models{m},double(bows.'));
+    [label, posterior] = predict(models{m},double(bows.'));
     
-    scores = zeros(length(labels),1);
+    score = 0;
+    
     for i = length(labels)
-        score = strcmp(labels(i),label);
-        scores(i) = score;
+        score = score + strcmp(labels(i),label)/i;
     end
-    acc = sum(scores)/length(models);
+    
+    AP(m) = score/sum(labels(:) == classes(m));
+    
 end
 % TODO: entire function
    
-    
+%Mean Average Precision
+MAP = mean(AP); 
 
 
-
-acc =0;
+% acc =0;
 
 disp("finished evaluating testset");
 

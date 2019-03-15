@@ -50,8 +50,9 @@ models = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 
 %% test model
 
-accurracy = test_models(models, BoW_test_imgs, test_label); % (EX. 1.2)
-disp("Accuracy is " + accurracy + "%");
+MAP = test_models(models, BoW_test_imgs, test_label, classes); % (EX. 1.2) MAP = mean average precision
+% disp("Accuracy is " + accurracy + "%");
+disp("Mean Average Precision is " + MAP);
 
 
 %% bonus 1 
