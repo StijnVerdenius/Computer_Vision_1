@@ -8,19 +8,23 @@ if (batch_dimension == 2)
 end
 
 % TODO: include these somehow, not very clear from assignment
-[gray_imgs, normalized_imgs, opponent_imgs] = getColorSpaces(imgs);
+[gray_imgs, ~, opponent_imgs] = getColorSpaces(imgs);
 
 descriptors = [];
 
 for i =1:number_of_images
     
-    current_img = gray_imgs(:, :, :, i); % TODO: gray, opponent, normal and/or normalized??
-    current_descriptors = sift_descriptor_extraction(current_img);
+    current_gray_img = gray_imgs(:, :, :, i); % TODO: gray, opponent, normal and/or normalized??
+    current_img = imgs(:, :, :, i);
+    current_opponent_img = opponent_imgs(:, :, :, i);
+    current_descriptors = sift_descriptor_extraction(current_img, current_opponent_img ,current_gray_img);
+    
+    size(current_descriptors)
     
     % TODO: make sure it is retracable to which image certain descriptors belonged too, i
     % don't think it is now. If we can't trace them back to a label we
     % cannot train on them.
-    descriptors = cat(4, descriptors, current_descriptors);
+%     descriptors = cat(4, descriptors, current_descriptors);
     
 end
 
