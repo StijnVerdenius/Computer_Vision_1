@@ -10,7 +10,7 @@ clear all
 [vocab_building_imgs, ~] = load_data("train" , 1.0, false, 1, ["all"], true);
 
 
-%% create vocabulary 
+%% create vocabulary
 
 random_number = 400; % According to assignment either 400, 1000 or 4000
 vocab = create_vocabulary(vocab_building_imgs, random_number);

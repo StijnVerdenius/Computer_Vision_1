@@ -1,6 +1,11 @@
 function cluster_centers = find_clusters(descriptors, number_of_clusters)
 % applies k-means to descriptors (NOT FINISHED)
 
-cluster_centers = 0;
+disp("started finding clusters");
+
+assert(1==2); % break  
+
+disp("finished finding clusters");
+
 
 end

@@ -1,6 +1,8 @@
 function descriptors = get_descriptors(imgs) % (EX. 2.1)
 % generates descriptors for multiple images 
 
+disp("start generating descriptors");
+
 % TODO: check after implementing opponent and rgb sift that it still works
 
 batch_dimension = numel(size(imgs));
@@ -11,14 +13,15 @@ end
 
 test_descriptor = sift_descriptor_extraction(imgs(:,:,:,1));
 
-descriptors = zeros(128, size(test_descriptor, 2), number_of_images);
+descriptors = zeros(128, size(test_descriptor, 2), number_of_images, 'uint8');
 
 for i =1:number_of_images
-    
     current_img = imgs(:, :, :, i);
     current_descriptors = sift_descriptor_extraction(current_img);
     descriptors(:,:,i) = current_descriptors;
     
 end
+
+disp("finished generating descriptors");
 
 end
