@@ -45,12 +45,12 @@ BoW_test_imgs = bagging_images(test_im, vocab, loading_if_possible, saving_when_
 
 classes = [1, 2, 9, 7, 3]; % ["airplanes", "birds", "ships", "horses" , "cars"]
 
-model = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
+models = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 
 
 %% test model
 
-accurracy = test_model(model, BoW_test_imgs, test_label); % (EX. 1.2)
+accurracy = test_models(models, BoW_test_imgs, test_label); % (EX. 1.2)
 disp("Accuracy is " + accurracy + "%");
 
 
