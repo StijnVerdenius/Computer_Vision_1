@@ -1,4 +1,6 @@
 function path = get_path(keyword)
+% gets a data path out given a keyword, such that when changing paths you
+% only need to change one function and not go through all files.
 
 main_path = "./Part_1";
 delimiter = "/";
