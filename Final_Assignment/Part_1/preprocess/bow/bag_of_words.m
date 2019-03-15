@@ -2,9 +2,9 @@ function bow = bag_of_words(img, vocab)
 % converts one image to bag of words descriptor given a vocabulary (NOT FINISHED)
 
 % TODO: choose right size-dimension as soon as vocab is implemented
-vocab_size = size(vocab, 3);
+vocab_size = size(vocab, 2);
 
-descriptors = get_descriptors([img]);
+descriptors = sift_descriptor_extraction(img); 
 bow = zeros(vocab_size, 1);
 
 % TODO: match descriptors against vocab and then count (EX. 2.3). Subsequently,
