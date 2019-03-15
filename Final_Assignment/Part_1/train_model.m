@@ -53,6 +53,6 @@ model = fitPosterior(compact(model),double(bows.'), [new_labels]); %this fits a 
 
  
  
- disp("finished training svms");
+%  disp("finished training svms");
 
 end
