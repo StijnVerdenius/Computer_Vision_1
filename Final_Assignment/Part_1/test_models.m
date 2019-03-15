@@ -13,6 +13,9 @@ for m = 1:length(models)
     %labels are 1 if our binary SVM decides they belong to the trained
     %class and 0 otherwise
     [pred_label, posterior] = predict(models{m},double(bows.'));
+    
+%     disp("class " + classes(m) + " scores = " + posterior)
+    
 
     % replace labels that are 1 to the class of the model (class trained
     % on)
@@ -27,10 +30,12 @@ for m = 1:length(models)
     
     
     score = 0;
-    
+    cumulative = 0;
     for i = 1:length(actual_labels)
-        % + 1 if predicted label matches actual label
-        score = score + (score+strcmp(string(actual_labels(i)),string(pred_label(i))))/i;
+        % 1 if predicted label matches actual label or 0 otherwise
+        current_score = strcmp(string(actual_labels(i)),string(pred_label(i)));
+        cumulative = cumulative + current_score;
+        score = score + (cumulative)/i;
     end
     
     

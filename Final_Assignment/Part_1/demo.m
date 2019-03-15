@@ -34,7 +34,7 @@ two_dimensional_pictures = true;         % load pictures into vectors or plottab
 
 %% convert to bag of words
 
-loading_bow_if_possible = false;                           % same as before
+loading_bow_if_possible = true;                           % same as before
 saving_when_done = true;                                  % same as before
 sift_method = "dense";                                 % = dense or keypoint
 BoW_train_imgs = bagging_images(train_im, vocab, loading_bow_if_possible, saving_when_done, "train", sift_method); % transform images to BoW representation
