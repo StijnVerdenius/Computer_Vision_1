@@ -1,4 +1,4 @@
-function [MAP, index] = test_models(models, bows, actual_labels, classes) % EX. 2.6 --- is this the prefictor part?
+function [AP, MAP, sorted_classification_score, index] = test_models(models, bows, actual_labels, classes) % EX. 2.6 --- is this the prefictor part?
 % trains a SVM model with bows representations. (NOT FINISHED)
 
 disp("started evaluating testset");
@@ -6,7 +6,6 @@ disp("started evaluating testset");
 %Average Precisions
 AP = zeros(length(models),1);
 classification_score = zeros(length(models), size(bows, 2));
-
 
 for m = 1:length(models)
     

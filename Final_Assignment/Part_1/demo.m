@@ -34,7 +34,7 @@ two_dimensional_pictures = true;         % load pictures into vectors or plottab
 
 %% convert to bag of words
 
-loading_bow_if_possible = true;                           % same as before
+loading_bow_if_possible = false;                           % same as before
 saving_when_done = true;                                  % same as before
 sift_method = "dense";                                 % = dense or keypoint
 BoW_train_imgs = bagging_images(train_im, vocab, loading_bow_if_possible, saving_when_done, "train", sift_method); % transform images to BoW representation
@@ -50,11 +50,11 @@ models = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 
 %% test model
 
-[MAP, best_image_index] = test_models(models, BoW_test_imgs, test_label, classes); % (EX. 1.2) MAP = mean average precision
+[AP, MAP, scores, best_image_index] = test_models(models, BoW_test_imgs, test_label, classes); % (EX. 1.2) MAP = mean average precision
 % disp("Accuracy is " + accurracy + "%");
 disp("Mean Average Precision is " + MAP);
 
-visualize_images(test_im, best_image_index); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
+visualize_images(test_im, best_image_index, scores, sift_method, AP, MAP); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
 
 %% bonus 1 
 % (EX. 4.~)
