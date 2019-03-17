@@ -24,11 +24,11 @@ else
     end
     
     % init output
-    bow_imgs = zeros(vocab_size,number_of_images, 'int16');
+    bow_imgs = zeros(vocab_size,number_of_images, 'double');
     
     % generate bow-representation for each image
     for i = 1:number_of_images
-        bow_imgs(:,i) = bag_of_words(imgs(:,:,:,i), vocab, sift_method);
+        bow_imgs(:,i) = double(bag_of_words(imgs(:,:,:,i), vocab, sift_method));
     end
     
     % save output to cache if requested

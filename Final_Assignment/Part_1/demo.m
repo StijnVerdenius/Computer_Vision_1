@@ -13,7 +13,7 @@ vl_setup()
 %% create vocabulary
 
 vocabulary_size = 100;                    % According to assignment either 400, 1000 or 4000
-loading_vocab_if_possible = false;          % defines whether vocabulary will be loaded from cache
+loading_vocab_if_possible = true;          % defines whether vocabulary will be loaded from cache
 saving_when_done = true;                   % defines whether it will be cached after generating, given its not loaded
 vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done); % creates vocabulary
 
@@ -39,7 +39,6 @@ saving_when_done = true;                                  % same as before
 sift_method = "dense";                                 % = dense or keypoint
 BoW_train_imgs = bagging_images(train_im, vocab, loading_bow_if_possible, saving_when_done, "train", sift_method); % transform images to BoW representation
 BoW_test_imgs = bagging_images(test_im, vocab, loading_bow_if_possible, saving_when_done, "test", sift_method); % transform images to BoW representation
-
 
 %% train models
 

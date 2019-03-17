@@ -1,4 +1,4 @@
-function bow = bag_of_words(img, vocab, sift_method)
+function bow_norm = bag_of_words(img, vocab, sift_method)
 % converts one image to bag of words descriptor given a vocabulary (NOT FINISHED)
 
 % TODO: choose right size-dimension as soon as vocab is implemented
@@ -22,6 +22,8 @@ for d = 1:size(descriptors,2)
     end
     bow(best_cluster,1) = bow(best_cluster) + 1;
 end
+
+bow_norm = bow / norm(bow, 1); 
 
 % TODO: match descriptors against vocab and then count (EX. 2.3). Subsequently,
 % return bag of words frequencies for image (EX. 2.4)
