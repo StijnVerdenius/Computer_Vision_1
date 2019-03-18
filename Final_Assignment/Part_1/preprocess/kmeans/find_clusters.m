@@ -11,12 +11,12 @@ if (number_of_clusters < 1000)
     [cluster_centers] = vl_kmeans(unordered, number_of_clusters);
     
     
-% elseif(number_of_clusters<1500)    % TODO: test elkan, does it really work better for a 1000??
-%     [cluster_centers] = vl_kmeans(unordered, number_of_clusters,'algorithm', 'ELKAN');
-
+elseif(number_of_clusters<1500)    % TODO: test elkan, does it really work better for a 1000??
+    [cluster_centers] = vl_kmeans(unordered, number_of_clusters,'algorithm', 'ELKAN');
 
 else
     [cluster_centers] = vl_kmeans(unordered, number_of_clusters,'algorithm', 'ANN');
+    
 end
 
 disp("finished finding clusters");

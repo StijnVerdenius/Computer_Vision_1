@@ -12,8 +12,8 @@ vl_setup()
 
 %% create vocabulary
 
-vocabulary_size = 100;                    % According to assignment either 400, 1000 or 4000
-loading_vocab_if_possible = true;          % defines whether vocabulary will be loaded from cache
+vocabulary_size = 400;                    % According to assignment either 400, 1000 or 4000
+loading_vocab_if_possible = false;          % defines whether vocabulary will be loaded from cache
 saving_when_done = true;                   % defines whether it will be cached after generating, given its not loaded
 vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done); % creates vocabulary
 
@@ -24,7 +24,7 @@ wanted_classes = ["airplane", "bird", "ship", "horse", "car"];
 
 % change the following for different data selection
 start_index = 1;                         % index from which to start loading data in cas of non random loading
-percentage_of_data = 0.05;               % percentage of data loaded into model
+percentage_of_data = 0.25;               % percentage of data loaded into model
 random_selection = false;                % wether selection is random images
 two_dimensional_pictures = true;         % load pictures into vectors or plottable images
 
