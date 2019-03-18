@@ -1,4 +1,4 @@
-function descriptors = get_descriptors(imgs) % (EX. 2.1)
+function descriptors = get_descriptors(imgs, colorspace) % (EX. 2.1)
 % generates descriptors for multiple images 
 
 disp("start generating descriptors");
@@ -13,7 +13,7 @@ if (batch_dimension == 2)
 end
 
 % get initial descriptor in order to see its shape
-test_descriptor = sift_descriptor_extraction(imgs(:,:,:,1), "dense");
+test_descriptor = sift_descriptor_extraction(imgs(:,:,:,1), "dense", colorspace);
 
 % initialize output shape
 descriptors = zeros(128, size(test_descriptor, 2), number_of_images, 'uint8');
@@ -21,7 +21,7 @@ descriptors = zeros(128, size(test_descriptor, 2), number_of_images, 'uint8');
 % get sift descriptors for each image
 for i =1:number_of_images
     current_img = imgs(:, :, :, i);
-    current_descriptors = sift_descriptor_extraction(current_img, "dense");
+    current_descriptors = sift_descriptor_extraction(current_img, "dense", colorspace);
     descriptors(:,:,i) = current_descriptors;
 end
 
