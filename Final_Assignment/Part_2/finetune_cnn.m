@@ -86,6 +86,52 @@ splits = {'train', 'test'};
 %% Use train.mat and test.mat we provided from STL-10 to fill in necessary data members for training below
 %% You will need to, in a loop function,  1) read the image, 2) resize the image to (32,32,3), 3) read the label of that image
 
+% load data
+train = load('Part_1\data\stl10_matlab\train.mat');
+test = load('Part_1\data\stl10_matlab\test.mat');
+
+% add indicator attribute
+train.indicator = 1;
+test.indicator = 2;
+
+% indicators for the relevant classes (airplane bird car horse ship)
+relevant_classes = [1 2 3 7 9];
+
+% initialzie data, labels and sets
+new_length = length(train.y)/2 + length(test.y)/2;
+data = zeros(32, 32, 3, new_length);
+labels = zeros(new_length, 1);
+sets = zeros(new_length, 1); 
+
+idx = 0;
+
+train_test = {train, test};
+
+for j=1:2
+    
+    set = train_test{1};
+    
+    % keep only relevant classes
+    condition = ismember(set.y, relevant_classes);
+    set.X = set.X(condition, :);
+    set.y = set.y(condition);
+
+    for i=1:size(set.X, 1)
+        
+        idx = idx + 1;
+        
+        % get image and reshape it to rgb
+        im_array = set.X(i, :);
+        im_rgb = reshape(im_array, 96, 96, 3);
+        
+        data(: ,:, :, idx) = imresize(im_rgb, 1/3); % rescaled to 32, 32, 3
+        labels(idx) = set.y(i);
+        sets(idx) = set.indicator;
+    end
+    
+end
+
+
 %%
 % subtract mean
 dataMean = mean(data(:, :, :, sets == 1), 4);
