@@ -7,15 +7,19 @@ vl_setup()
 
 %% extract data for vocabulary
 
-[vocab_building_imgs, ~] = load_image_data("train" , 0.1, true, 1, ["all"], true); % get all classes from trainset to generate vocabulary
+[vocab_building_imgs, ~] = load_image_data("train" , 0.5, true, 1, ["all"], true); % get all classes from trainset to generate vocabulary
 
 
 %% create vocabulary
 
-vocabulary_size = 100;                    % According to assignment either 400, 1000 or 4000
-loading_vocab_if_possible = true;          % defines whether vocabulary will be loaded from cache
+vocabulary_size = 400;                    % According to assignment either 400, 1000 or 4000
+loading_vocab_if_possible = false;          % defines whether vocabulary will be loaded from cache
 saving_when_done = true;                   % defines whether it will be cached after generating, given its not loaded
-vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done); % creates vocabulary
+cache_version_vocab = "default";
+apply_sampling = true;
+number_of_samples = 10^5;
+
+vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done, cache_version_vocab, apply_sampling, number_of_samples); % creates vocabulary
 
 
 %% extract data for training and testing
@@ -24,7 +28,7 @@ wanted_classes = ["airplane", "bird", "ship", "horse", "car"];
 
 % change the following for different data selection
 start_index = 1;                         % index from which to start loading data in cas of non random loading
-percentage_of_data = 0.05;               % percentage of data loaded into model
+percentage_of_data = 0.01;               % percentage of data loaded into model
 random_selection = false;                % wether selection is random images
 two_dimensional_pictures = true;         % load pictures into vectors or plottable images
 
@@ -34,11 +38,12 @@ two_dimensional_pictures = true;         % load pictures into vectors or plottab
 
 %% convert to bag of words
 
-loading_bow_if_possible = false;                           % same as before
+loading_bow_if_possible = true;                           % same as before
 saving_when_done = true;                                  % same as before
+cache_version_bow = "default";
 sift_method = "dense";                                 % = dense or keypoint
-BoW_train_imgs = bagging_images(train_im, vocab, loading_bow_if_possible, saving_when_done, "train", sift_method); % transform images to BoW representation
-BoW_test_imgs = bagging_images(test_im, vocab, loading_bow_if_possible, saving_when_done, "test", sift_method); % transform images to BoW representation
+BoW_train_imgs = bagging_images(train_im, vocab, loading_bow_if_possible, saving_when_done, "train", sift_method, cache_version_bow); % transform images to BoW representation
+BoW_test_imgs = bagging_images(test_im, vocab, loading_bow_if_possible, saving_when_done, "test", sift_method, cache_version_bow); % transform images to BoW representation
 
 %% train models
 

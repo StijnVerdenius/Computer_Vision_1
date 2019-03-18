@@ -1,4 +1,4 @@
-function bow_imgs = bagging_images(imgs, vocab, load_from_file, save_to_file, set_name, sift_method)
+function bow_imgs = bagging_images(imgs, vocab, load_from_file, save_to_file, set_name, sift_method, cache_version)
 % converts many images to bag of words descriptor given a vocabulary
 
 disp("started finding bag of words representations");
@@ -6,9 +6,9 @@ disp("started finding bag of words representations");
 local_filename = "bow_"+set_name;
 
 % load from cache if available
-if (load_from_file && does_file_exist(local_filename)) 
+if (load_from_file && does_file_exist(local_filename, cache_version)) 
     
-    bow_imgs = load_cached_data(local_filename);
+    bow_imgs = load_cached_data(local_filename, cache_version);
     
 else
 
@@ -33,7 +33,7 @@ else
     
     % save output to cache if requested
     if (save_to_file)
-        cache_data(local_filename, bow_imgs);
+        cache_data(local_filename, bow_imgs, cache_version);
     end
 
 end
