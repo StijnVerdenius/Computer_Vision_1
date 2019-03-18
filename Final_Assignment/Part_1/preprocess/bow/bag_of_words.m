@@ -7,21 +7,11 @@ vocab_size = size(vocab, 2);
 descriptors = sift_descriptor_extraction(img, sift_method); 
 bow = zeros(vocab_size, 1);
 
-
 for d = 1:size(descriptors,2)
-    descriptor = double(descriptors(:,d));
-    best_cluster = -1;
-    best_distance = intmax;
-    for i= 1:vocab_size
-        cluster_center = vocab(:,i);
-        distance = norm(descriptor - cluster_center);
-        if distance < best_distance
-            best_distance = distance;
-            best_cluster = i;
-        end
-    end
+    [~, best_cluster] = min(vl_alldist(double(descriptors(:,d)), double(vocab)));
     bow(best_cluster,1) = bow(best_cluster) + 1;
 end
+
 
 bow_norm = bow / norm(bow, 1); 
 
