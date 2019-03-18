@@ -1,4 +1,4 @@
-function vocabulary = create_vocabulary(imgs, number_of_clusters, load_from_file, save_to_file, cache_version)
+function vocabulary = create_vocabulary(imgs, number_of_clusters, load_from_file, save_to_file, cache_version, apply_sampling, number_of_samples)
 % creates a visual vocabulary to be used (EX. 2.2)
 
 disp("Start building vocabulary");
@@ -16,7 +16,7 @@ else
     descriptors = get_descriptors(imgs);
     
     % generate vocabulary out of it
-    vocabulary = find_clusters(descriptors, number_of_clusters);
+    vocabulary = find_clusters(descriptors, number_of_clusters, apply_sampling, number_of_samples);
     
     % save to cache if needed
     if (save_to_file)
