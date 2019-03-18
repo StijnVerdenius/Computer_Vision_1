@@ -23,7 +23,7 @@ for m = 1:numel(models)
     %matix - rows = model, columns = image scores from selected model
     
 %     classification_score(m,:) = posterior(:,2).';
-    classification_score(m,:) = posterior.';
+    classification_score(m,:) = -posterior.';
     
     %Average Precision calculations
     score = 0;
@@ -48,7 +48,6 @@ MAP = mean(AP);
 %get sorted images and keep track of index
 [sorted_classification_score , index ] = sort(classification_score, 2 , 'descend');
 
-sorted_classification_score
 
 % acc =0;
 
