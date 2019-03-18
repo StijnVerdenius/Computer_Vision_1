@@ -1,4 +1,4 @@
-function bow_norm = bag_of_words(img, vocab,colorspace)
+function bow_norm = bag_of_words(img, vocab, sift_method, colorspace)
 % converts one image to bag of words descriptor given a vocabulary (NOT FINISHED)
 
 % TODO: choose right size-dimension as soon as vocab is implemented

@@ -7,37 +7,40 @@ disp("started evaluating testset");
 AP = zeros(length(models),1);
 classification_score = zeros(length(models), size(bows, 2));
 
-for m = 1:length(models)
+for m = 1:numel(models)
     
     %labels are 1 if our binary SVM decides they belong to the trained
     %class and 0 otherwise
-    [pred_label, posterior] = predict(models{m},double(bows.'));
     
-%     disp("class " + classes(m) + " scores = " + posterior)
+%     [pred_label, posterior] = predict(models{m},double(bows.'));
+    [pred_label, accuracy, posterior] = predict(double(actual_labels), sparse(bows.'), models{m});
     
-
     % replace labels that are 1 to the class of the model (class trained
     % on)
+    
     pred_label(pred_label == 1) = classes(m);
     
     %matix - rows = model, columns = image scores from selected model
-    classification_score(m,:) = posterior(:,2).';    
     
+%     classification_score(m,:) = posterior(:,2).';
+    classification_score(m,:) = posterior.';
+    
+    %Average Precision calculations
     score = 0;
     cumulative = 0;
-    for i = 1:length(actual_labels)
+    
+    for i = 1:numel(actual_labels)
         % 1 if predicted label matches actual label or 0 otherwise
-        current_score = strcmp(string(actual_labels(i)),string(pred_label(i)));
-        cumulative = cumulative + current_score;
-        score = score + (cumulative)/i;
+        x_i = actual_labels(i) == pred_label(i);
+        cumulative = cumulative + x_i;
+        f_c = x_i * cumulative;
+        score = score + (f_c)/i;
     end
-    
-    
+ 
     AP(m) = score/sum(actual_labels(:) == classes(m));
     
 end
 
-   
 %Mean Average Precision
 MAP = mean(AP); 
 
@@ -45,12 +48,11 @@ MAP = mean(AP);
 %get sorted images and keep track of index
 [sorted_classification_score , index ] = sort(classification_score, 2 , 'descend');
 
-
-
-
+sorted_classification_score
 
 % acc =0;
 
-disp("finished evaluating testset");
-
+disp("finished evaluating testset");    
+    
+    
 end

@@ -5,31 +5,25 @@ function model = train_model(bows, labels, class) % EX. 2.5
 disp("started training svms for class " + class);
 
 
-
 % Create binary classes for each classifier
-new_labels = zeros(length(labels),1);
+new_labels = zeros(numel(labels),1);
 
 % label = 1 if belonging to selected class, otherwise 0
 for i = 1:numel(labels) 
-    current_label = strcmp(string(labels(i)),string(class)); 
+    current_label = labels(i) == class; 
     new_labels(i) = current_label;
 end
 
 
 %train binary SVM 
-% model = fitcsvm(double(bows.'),[new_labels],'ClassNames',[false true],'Standardize',true,'KernelFunction','rbf','BoxConstraint',1);
-model = fitcsvm(double(bows.'),[new_labels],'ClassNames',[0 1]);
+
+% model = fitcsvm(double(bows.'), [new_labels],'ClassNames',[0 1],'KernelFunction','rbf');
+
+model = train(double(new_labels), sparse(bows.'));
+
 
 %this fits a score-to-posterior-probability transformation function to the scores
 % model = fitSVMPosterior(compact(model),double(bows.'), [new_labels]);
-
-
-% bows — Matrix of predictor data, where each row is one observation, and each column is one predictor.
  
-% labels — Array of class labels with each row corresponding to the value of the corresponding row in Bows.
-
- 
- 
-%  disp("finished training svms");
 
 end

@@ -1,4 +1,4 @@
-function [] = visualize_images(images, index, scores, sift_method, AP, MAP)
+function [] = visualize_images(images, index, scores, sift_method, colorspace, AP, MAP)
 
 % rows = class, column = image index
 top5_set_idx = index(:, 1:5);
@@ -6,7 +6,7 @@ bottom5_set_idx = index(:,end-5:end);
 
 classes = ["airplanes", "birds", "ships", "horses" , "cars"];
 
-figure('NumberTitle', 'off', 'Name', 'Top 5 test images per setup (' + sift_method + ', mAP = ' + MAP + ')');
+figure('NumberTitle', 'off', 'Name', 'Top 5 test images per setup (' + sift_method + ', ' + colorspace + ', mAP = ' + MAP + ')');
 
 class_idx = 1;
 for i = 1:25
@@ -26,7 +26,7 @@ for i = 1:25
 end
 
 
-figure('NumberTitle', 'off', 'Name', 'Bottom 5 test images per setup (' + sift_method + ', mAP = ' + MAP + ')');
+figure('NumberTitle', 'off', 'Name', 'Bottom 5 test images per setup (' + sift_method + ', ' + colorspace + ', mAP = ' + MAP + ')');
 
 class_idx = 1;
 for i = 1:25
