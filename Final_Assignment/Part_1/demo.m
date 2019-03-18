@@ -18,8 +18,9 @@ saving_when_done = true;                   % defines whether it will be cached a
 cache_version_vocab = "default";
 apply_sampling = true;
 number_of_samples = 10^5;
+colorspace = "rgb";
 
-vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done, cache_version_vocab, apply_sampling, number_of_samples); % creates vocabulary
+vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done, cache_version_vocab, apply_sampling, number_of_samples, colorspace); % creates vocabulary
 
 
 %% extract data for training and testing
