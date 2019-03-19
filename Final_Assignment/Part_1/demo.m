@@ -13,7 +13,7 @@ vl_setup()
 %% create vocabulary
 
 vocabulary_size = 400;                    % According to assignment either 400, 1000 or 4000
-loading_vocab_if_possible = false;          % defines whether vocabulary will be loaded from cache
+loading_vocab_if_possible = true;          % defines whether vocabulary will be loaded from cache
 saving_when_done = true;                   % defines whether it will be cached after generating, given its not loaded
 cache_version_vocab = "tuesday_morning_check";
 apply_sampling = true;
@@ -39,7 +39,7 @@ two_dimensional_pictures = true;         % load pictures into vectors or plottab
 
 %% convert to bag of words
 
-loading_bow_if_possible = false;                           % same as before
+loading_bow_if_possible = true;                           % same as before
 saving_when_done = true;                                  % same as before
 cache_version_bow = "default";
 sift_method = "dense";                                 % = dense or keypoint
