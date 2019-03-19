@@ -18,8 +18,9 @@ saving_when_done = true;                   % defines whether it will be cached a
 cache_version_vocab = "tueday_morning_check";
 apply_sampling = true;
 number_of_samples = 10^6;
+colorspace = "rgb";
 
-vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done, cache_version_vocab, apply_sampling, number_of_samples); % creates vocabulary
+vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done, cache_version_vocab, apply_sampling, number_of_samples, colorspace); % creates vocabulary
 
 
 %% extract data for training and testing
@@ -38,12 +39,12 @@ two_dimensional_pictures = true;         % load pictures into vectors or plottab
 
 %% convert to bag of words
 
-loading_bow_if_possible = true;                           % same as before
+loading_bow_if_possible = false;                           % same as before
 saving_when_done = true;                                  % same as before
 cache_version_bow = "default";
 sift_method = "dense";                                 % = dense or keypoint
-BoW_train_imgs = bagging_images(train_im, vocab, loading_bow_if_possible, saving_when_done, "train", sift_method, cache_version_bow); % transform images to BoW representation
-BoW_test_imgs = bagging_images(test_im, vocab, loading_bow_if_possible, saving_when_done, "test", sift_method, cache_version_bow); % transform images to BoW representation
+BoW_train_imgs = bagging_images(train_im, vocab, loading_bow_if_possible, saving_when_done, "train", sift_method, cache_version_bow, colorspace); % transform images to BoW representation
+BoW_test_imgs = bagging_images(test_im, vocab, loading_bow_if_possible, saving_when_done, "test", sift_method, cache_version_bow, colorspace); % transform images to BoW representation
 
 %% train models
 
@@ -58,7 +59,7 @@ models = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 % disp("Accuracy is " + accurracy + "%");
 disp("Mean Average Precision is " + MAP);
 
-visualize_images(test_im, best_image_index, scores, sift_method, AP, MAP); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
+visualize_images(test_im, best_image_index, scores, sift_method, colorspace, AP, MAP); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
 
 %% bonus 1 
 % (EX. 4.~)

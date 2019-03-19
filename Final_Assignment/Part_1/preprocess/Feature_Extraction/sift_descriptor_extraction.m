@@ -1,7 +1,7 @@
-function descriptors_concat = sift_descriptor_extraction(img, method)
+function descriptors_concat = sift_descriptor_extraction(img, method, colorspace)
 % transforms image to sift descriptor (gray-scale only) (NOT FINISHED)
 
-descriptors = cell(1,7);
+descriptors = cell(1,3);
 
 img_gray = ConvertColorSpace(img, 'gray'); % transform to grayscale
 img_opp = ConvertColorSpace(img, 'opponent');
@@ -14,20 +14,37 @@ if (strcmp( method, "dense"))
     magnif = 3 ;
     smoothing_constant = sqrt((binSize/magnif)^2 - .25);
     
-    [~, descriptors{1}] = vl_dsift(vl_imsmooth(im2single(img_gray), smoothing_constant), 'step', 3, 'size', 9, 'fast');
-    for channel=1:3
-        [~, descriptors{1 + channel}] = vl_dsift(vl_imsmooth(im2single(img_opp(:, :, channel)), smoothing_constant), 'step', 3, 'size', 9, 'fast');
-        [~, descriptors{4 + channel}] = vl_dsift(vl_imsmooth(im2single(img(:, :, channel)), smoothing_constant), 'step', 3, 'size', 9, 'fast');
-    end
-elseif (strcmp( method, "keypoint"))
-    [~, descriptors{1}] = vl_sift(im2single(img_gray)); % get descriptors
-    for channel=1:3
-        [~, descriptors{1 + channel}] = vl_sift(im2single(img_opp(:, :, channel)));
-        [~, descriptors{4 + channel}] = vl_sift(im2single(img(:, :, channel)));
-    end
-else
-    error("unrecognized sift option: "+ method);
-end
+    switch colorspace
+        case 'grayscale'
+            if (strcmp( method, "keypoint"))
+                [~, descriptors{1}] = vl_sift(im2single(img_gray)); % get descriptors
+            else
+                [~, descriptors{1}] = vl_dsift(vl_imsmooth(im2single(img_gray), smoothing_constant), 'step', 3, 'size', 9, 'fast');
+            end
+        case 'rgb'
+            if (strcmp( method, "keypoint"))
+                for channel=1:3
+                    [~, descriptors{channel}] = vl_sift(im2single(img(:, :, channel)));
+                end
+            else
+                for channel=1:3
+                    [~, descriptors{channel}] = vl_dsift(vl_imsmooth(im2single(img(:, :, channel)), smoothing_constant), 'step', 3, 'size', 9, 'fast');
+                end
+            end
+        case 'opponent'
+            if (strcmp( method, "keypoint"))
+                for channel=1:3
+                    [~, descriptors{channel}] = vl_sift(im2single(img_opp(:, :, channel)));
+                end
+            else
+                for channel=1:3
+                    [~, descriptors{channel}] = vl_dsift(vl_imsmooth(im2single(img_opp(:, :, channel)), smoothing_constant), 'step', 3, 'size', 9, 'fast');
+                end
+            end
+        otherwise
+            error("unrecognized sift option: "+ method);
+    end   
+   
 
 descriptors_concat = cell2mat(descriptors);
     
