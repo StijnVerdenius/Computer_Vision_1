@@ -12,8 +12,8 @@ for m = 1:numel(models)
     %labels are 1 if our binary SVM decides they belong to the trained
     %class and 0 otherwise
     
-%     [pred_label, posterior] = predict(models{m},double(bows.'));
-    [pred_label, accuracy, posterior] = predict(double(actual_labels), sparse(bows.'), models{m});
+    [pred_label, posterior] = predict(models{m},double(bows.'));
+%     [pred_label, accuracy, posterior] = predict(double(actual_labels), sparse(bows.'), models{m});
     
     % replace labels that are 1 to the class of the model (class trained
     % on)
@@ -22,8 +22,8 @@ for m = 1:numel(models)
     
     %matix - rows = model, columns = image scores from selected model
     
-%     classification_score(m,:) = posterior(:,2).';
-    classification_score(m,:) = -posterior.';
+    classification_score(m,:) = posterior(:,2).';
+%     classification_score(m,:) = -posterior.';
     
     %Average Precision calculations
     score = 0;

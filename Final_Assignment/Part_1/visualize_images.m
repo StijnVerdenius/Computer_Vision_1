@@ -1,4 +1,4 @@
-function [] = visualize_images(images, index, scores, sift_method, colorspace, AP, MAP)
+function [] = visualize_images(images, index, scores, sift_method, colorspace, vocabulary_size, AP, MAP)
 
 % rows = class, column = image index
 top5_set_idx = index(:, 1:5);
@@ -26,7 +26,7 @@ for i = 1:25
 end
 
 
-figure('NumberTitle', 'off', 'Name', 'Bottom 5 test images per setup (' + sift_method + ', ' + colorspace + ', mAP = ' + MAP + ')');
+figure('NumberTitle', 'off', 'Name', 'Bottom 5 test images per setup (' + sift_method + ', ' + colorspace + ', mAP = ' + MAP + ', k = ' +  vocabulary_size + ')');
 
 class_idx = 1;
 for i = 1:25
