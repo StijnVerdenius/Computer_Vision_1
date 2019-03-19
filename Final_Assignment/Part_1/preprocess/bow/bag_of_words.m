@@ -8,7 +8,7 @@ descriptors = sift_descriptor_extraction(img, sift_method, colorspace);
 bow = zeros(vocab_size, 1);
 
 for d = 1:size(descriptors,2)
-    [~, best_cluster] = min(vl_alldist(double(descriptors(:,d)), double(vocab)));
+    [~, best_cluster] = min(vl_alldist(double(im2single(descriptors(:,d))), double(vocab)));
     bow(best_cluster,1) = bow(best_cluster) + 1;
 end
 

@@ -49,13 +49,20 @@ disp("started training svms for class " + class);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Elias
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ordering
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% below!
+%get training set size - needs to be divisible by 8
+size = find(labels == class);
+size = numel(size);
+while rem(size, 8) ~= 0
+    size = size - 1;
+end
 
+size = size/8;
 
 all_classes = [1, 2, 9, 7, 3];
 
 other_classes = all_classes(all_classes ~= class);
 
-train_set = zeros(numel(bows(:,1)),1000);
+train_set = zeros(numel(bows(:,1)),(size*8));
 
 %get 125 negative example images per class 
 for c = 1:numel(other_classes)
@@ -63,10 +70,10 @@ for c = 1:numel(other_classes)
     idx = find(labels == other_classes(c));
     %get 125 random images from class c
     permutations = randperm(numel(idx));
-    subset = idx(permutations(1:125));
+    subset = idx(permutations(1:size));
     %get indices
-    h = c*125;
-    l = h-124;
+    h = c*size;
+    l = h-size+1;
     %add to the training set
     train_set(:,l:h) = bows(:,subset);
 end    
@@ -75,19 +82,19 @@ end
 %get 500 positive example images
 idx = find(labels == class);
 permutations = randperm(numel(idx));
-subset = idx(permutations(1:500));
+subset = idx(permutations(1:(size*4)));
 %add to the training set
-train_set(:,h+1:1000) = bows(:,subset);
+train_set(:,h+1:(size*8)) = bows(:,subset);
 
 
 % %Create binary classes for each classifier
-lab_0 = zeros(500,1);
-lab_1 = ones(500,1);
+lab_0 = zeros((size*4),1);
+lab_1 = ones((size*4),1);
 new_labels = cat(1,lab_0,lab_1);
 
 
 % Arrange training set randomly
-permutations = randperm(1000);
+permutations = randperm(size*8);
 train_set = train_set(:, permutations);
 new_labels = new_labels(permutations);
 
@@ -96,8 +103,7 @@ new_labels = new_labels(permutations);
 % new_labels = zeros(length(labels),1);
 % 
 % % label = 1 if belonging to selected class, otherwise 0
-% for i = 1:numel(labels) 
-% %     current_label = strcmp(string(labels(i)),string(class)); 
+% for i = 1:numel(labels)  
 %     current_label = labels(i) == class; 
 %     new_labels(i) = current_label;
 % end
@@ -108,7 +114,7 @@ new_labels = new_labels(permutations);
 
 model = fitcsvm(double(train_set.'), new_labels,'ClassNames',[0 1],'KernelFunction','rbf', 'Cost',[0 1;4 0]);
 
-% model = train(double(new_labels), sparse(train_set.'));
+% model = train(double(new_labels), sparse(train_set.'), '-b');
 
 % model = fitcsvm(double(new_bows.'), [new_labels],'ClassNames',[0 1],'KernelFunction','rbf', 'Cost',[0 1;4 0]);
 
@@ -118,6 +124,5 @@ model = fitcsvm(double(train_set.'), new_labels,'ClassNames',[0 1],'KernelFuncti
 
 %this fits a score-to-posterior-probability transformation function to the scores
 % model = fitSVMPosterior(compact(model),double(bows.'), [new_labels]);
- 
 
 end
