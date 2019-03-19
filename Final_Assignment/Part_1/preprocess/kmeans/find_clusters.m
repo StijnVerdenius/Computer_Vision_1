@@ -13,13 +13,15 @@ if (apply_sampling)
 end
 
 % cluster descriptors, get cluster centroids
-if (number_of_clusters < 1000)
-    [cluster_centers] = vl_kmeans(unordered, number_of_clusters);   
-elseif(number_of_clusters<1500)    % TODO: test elkan, does it really work better for a 1000??
-    [cluster_centers] = vl_kmeans(unordered, number_of_clusters,'algorithm', 'ELKAN');
-else
-    [cluster_centers] = vl_kmeans(unordered, number_of_clusters,'algorithm', 'ANN');
-end
+tic %if (number_of_clusters < 1000)
+[cluster_centers] = vl_kmeans(unordered, number_of_clusters);   
+toc
+tic %elseif(number_of_clusters<1500)    % TODO: test elkan, does it really work better for a 1000??
+[cluster_centers] = vl_kmeans(unordered, number_of_clusters,'algorithm', 'ELKAN');
+toc
+tic%else
+[cluster_centers] = vl_kmeans(unordered, number_of_clusters,'algorithm', 'ANN');
+toc%end
 
 disp("finished finding clusters");
 

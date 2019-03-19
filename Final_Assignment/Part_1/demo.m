@@ -7,7 +7,7 @@ vl_setup()
 
 %% extract data for vocabulary
 
-[vocab_building_imgs, ~] = load_image_data("train" , 0.5, true, 1, ["all"], true); % get all classes from trainset to generate vocabulary
+[vocab_building_imgs, ~] = load_image_data("train" , 1.0, true, 1, ["all"], true); % get all classes from trainset to generate vocabulary
 
 
 %% create vocabulary
@@ -15,9 +15,9 @@ vl_setup()
 vocabulary_size = 400;                    % According to assignment either 400, 1000 or 4000
 loading_vocab_if_possible = false;          % defines whether vocabulary will be loaded from cache
 saving_when_done = true;                   % defines whether it will be cached after generating, given its not loaded
-cache_version_vocab = "default";
+cache_version_vocab = "tueday_morning_check";
 apply_sampling = true;
-number_of_samples = 10^5;
+number_of_samples = 10^6;
 
 vocab = create_vocabulary(vocab_building_imgs, vocabulary_size, loading_vocab_if_possible, saving_when_done, cache_version_vocab, apply_sampling, number_of_samples); % creates vocabulary
 
@@ -28,7 +28,7 @@ wanted_classes = ["airplane", "bird", "ship", "horse", "car"];
 
 % change the following for different data selection
 start_index = 1;                         % index from which to start loading data in cas of non random loading
-percentage_of_data = 0.01;               % percentage of data loaded into model
+percentage_of_data = 1.0;               % percentage of data loaded into model
 random_selection = false;                % wether selection is random images
 two_dimensional_pictures = true;         % load pictures into vectors or plottable images
 
