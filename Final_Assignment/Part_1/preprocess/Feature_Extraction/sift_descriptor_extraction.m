@@ -1,7 +1,7 @@
 function descriptors_concat = sift_descriptor_extraction(img, method, colorspace)
 % transforms image to sift descriptor (gray-scale only) (NOT FINISHED)
 
-descriptors = cell(1,3);
+
 
 img_gray = ConvertColorSpace(img, 'gray'); % transform to grayscale
 img_opp = ConvertColorSpace(img, 'opponent');
@@ -16,12 +16,14 @@ if (strcmp( method, "dense"))
     
     switch colorspace
         case 'grayscale'
+            descriptors = cell(1,1);
             if (strcmp( method, "keypoint"))
                 [~, descriptors{1}] = vl_sift(im2single(img_gray)); % get descriptors
             else
                 [~, descriptors{1}] = vl_dsift(vl_imsmooth(im2single(img_gray), smoothing_constant), 'step', 3, 'size', 9, 'fast');
             end
         case 'rgb'
+            descriptors = cell(1,3);
             if (strcmp( method, "keypoint"))
                 for channel=1:3
                     [~, descriptors{channel}] = vl_sift(im2single(img(:, :, channel)));
@@ -32,6 +34,7 @@ if (strcmp( method, "dense"))
                 end
             end
         case 'opponent'
+            descriptors = cell(1,3);
             if (strcmp( method, "keypoint"))
                 for channel=1:3
                     [~, descriptors{channel}] = vl_sift(im2single(img_opp(:, :, channel)));
@@ -47,7 +50,6 @@ if (strcmp( method, "dense"))
    
 
 descriptors_concat = cell2mat(descriptors);
-    
 % TODO: tune vldsift parameters
 % TODO: check if the right descriptors are being returned.
 % TODO: do we need the frames?
