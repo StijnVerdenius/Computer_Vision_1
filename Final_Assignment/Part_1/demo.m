@@ -48,9 +48,7 @@ BoW_test_imgs = bagging_images(test_im, vocab, loading_bow_if_possible, saving_w
 
 %% train models
 
-classes = [1, 2, 9, 7, 3]; % ["airplanes", "birds", "ships", "horses" , "cars"]
- % (EX. 1.2) MAP = mean average precision
-% % disp("Accuracy is " + accurracy + "%");
+classes = [1, 2, 9, 7, 3]; % ["airplanes", "birds", "ships", "horses" , "cars"] % (EX. 1.2)
 
 
 models = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
@@ -58,13 +56,15 @@ models = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 
 %% test model
 
-[AP, MAP, scores, best_image_index] = test_models(models, BoW_test_imgs, test_label, classes);
 
-disp("Mean Average Precision is (us) " + MAP);
 MAP = victor_train_test(BoW_train_imgs, train_label, BoW_test_imgs, test_label, classes);
 disp("Mean Average Precision is (victor) " + MAP);
 
-% visualize_images(test_im, best_image_index, scores, sift_method, colorspace, vocabulary_size, AP, MAP); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
+[AP, MAP, scores, best_image_index] = test_models(models, BoW_test_imgs, test_label, classes);
+
+disp("Mean Average Precision is (us) " + MAP);
+
+visualize_images(test_im, best_image_index, scores, sift_method, colorspace, vocabulary_size, AP, MAP); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
 
 %% bonus 1 
 % (EX. 4.~)
