@@ -25,28 +25,47 @@ for m = 1:numel(models)
     classification_score(m,:) = posterior(:,2).';
 %     classification_score(m,:) = -posterior.';
     
-    %Average Precision calculations
+%     %Average Precision calculations
+%     score = 0;
+%     cumulative = 0;
+%     
+%     for i = 1:numel(actual_labels)
+%         % 1 if predicted label matches actual label or 0 otherwise
+%         x_i = actual_labels(i) == pred_label(i);
+%         cumulative = cumulative + x_i;
+%         f_c = x_i * cumulative;
+%         score = score + (f_c)/i;
+%     end
+%  
+%     AP(m) = score/sum(actual_labels(:) == classes(m));
+    
+end
+
+%get sorted images and keep track of index
+[sorted_classification_score , index ] = sort(classification_score, 2 , 'descend');
+
+%Average Precision calculations
+for m = 1:numel(models)
     score = 0;
     cumulative = 0;
     
     for i = 1:numel(actual_labels)
         % 1 if predicted label matches actual label or 0 otherwise
-        x_i = actual_labels(i) == pred_label(i);
+        x_i = actual_labels(index(m,i)) == pred_label(index(m,i));
         cumulative = cumulative + x_i;
         f_c = x_i * cumulative;
         score = score + (f_c)/i;
     end
  
     AP(m) = score/sum(actual_labels(:) == classes(m));
-    
 end
+
 
 %Mean Average Precision
 MAP = mean(AP); 
 
 
-%get sorted images and keep track of index
-[sorted_classification_score , index ] = sort(classification_score, 2 , 'descend');
+
 
 
 % acc =0;
