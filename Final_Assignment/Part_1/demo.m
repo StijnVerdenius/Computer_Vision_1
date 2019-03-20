@@ -16,13 +16,13 @@ percentage_vocab = 1.0;
 
 %% create vocabulary
 
-% VARIABLES TO SET
-vocabulary_size = 400;											% either 400, 1000 or 4000
-loading_vocab_if_possible = true;								% defines whether vocabulary will be loaded from cache
-saving_when_done = true;										% defines whether it will be cached after generating, given its not loaded
-apply_sampling = true;											% apply sampling of descriptors before entering k means
-number_of_samples = 5*10^5;										% if you do sampling, how many?
-colorspace = "opponent";										% define the to be used color space	
+vocabulary_size = 1000;                    % According to assignment either 400, 1000 or 4000
+loading_vocab_if_possible = true;          % defines whether vocabulary will be loaded from cache
+saving_when_done = true;                   % defines whether it will be cached after generating, given its not loaded
+apply_sampling = true;
+number_of_samples = 5*10^5;
+colorspace = "rgb";
+cache_version_vocab = colorspace + "_" + vocabulary_size; % unique for combination of colorspace and vocabsize
 
 % automatically deduce cache version
 cache_version_vocab = colorspace + "_" + vocabulary_size;
