@@ -1,5 +1,7 @@
 function vocabulary = create_vocabulary(imgs, number_of_clusters, load_from_file, save_to_file, cache_version, apply_sampling, number_of_samples, colorspace)
-% creates a visual vocabulary to be used (EX. 2.2)
+% creates a visual vocabulary to be used (Exercise. 2.2)
+
+
 
 disp("Start building vocabulary");
 
