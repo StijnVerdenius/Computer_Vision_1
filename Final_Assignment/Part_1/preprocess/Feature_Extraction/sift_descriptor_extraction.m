@@ -20,7 +20,7 @@ if (strcmp( method, "dense"))
             if (strcmp( method, "keypoint"))
                 [~, descriptors{1}] = vl_sift(im2single(img_gray)); % get descriptors
             else
-                [~, descriptors{1}] = vl_dsift(vl_imsmooth(im2single(img_gray), smoothing_constant), 'step', 3, 'size', 9, 'fast');
+                [~, descriptors{1}] = vl_dsift(vl_imsmooth(im2single(img_gray), smoothing_constant), 'step', 5, 'size', 21, 'fast');
             end
         case 'rgb'
             descriptors = cell(1,3);
@@ -30,7 +30,7 @@ if (strcmp( method, "dense"))
                 end
             else
                 for channel=1:3
-                    [~, descriptors{channel}] = vl_dsift(vl_imsmooth(im2single(img(:, :, channel)), smoothing_constant), 'step', 3, 'size', 9, 'fast');
+                    [~, descriptors{channel}] = vl_dsift(vl_imsmooth(im2single(img(:, :, channel)), smoothing_constant), 'step', 5, 'size', 21, 'fast');
                 end
             end
         case 'opponent'
@@ -41,7 +41,7 @@ if (strcmp( method, "dense"))
                 end
             else
                 for channel=1:3
-                    [~, descriptors{channel}] = vl_dsift(vl_imsmooth(im2single(img_opp(:, :, channel)), smoothing_constant), 'step', 3, 'size', 9, 'fast');
+                    [~, descriptors{channel}] = vl_dsift(vl_imsmooth(im2single(img_opp(:, :, channel)), smoothing_constant), 'step', 5, 'size', 21, 'fast');
                 end
             end
         otherwise
