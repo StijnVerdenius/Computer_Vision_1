@@ -12,10 +12,10 @@ vl_setup()
 
 %% create vocabulary
 
-vocabulary_size = 400;                    % According to assignment either 400, 1000 or 4000
+vocabulary_size = 1000;                    % According to assignment either 400, 1000 or 4000
 loading_vocab_if_possible = true;          % defines whether vocabulary will be loaded from cache
 saving_when_done = true;                   % defines whether it will be cached after generating, given its not loaded
-cache_version_vocab = "400-gray";
+cache_version_vocab = "1000-gray";
 apply_sampling = true;
 number_of_samples = 10^6;
 colorspace = "grayscale";
@@ -39,10 +39,10 @@ two_dimensional_pictures = true;         % load pictures into vectors or plottab
 
 %% convert to bag of words
 
-loading_bow_if_possible = false;                           % same as before
+loading_bow_if_possible = true;                           % same as before
 saving_when_done = true;                                  % same as before
-cache_version_bow = "400-gray-keypoint";
-sift_method = "keypoint";                                 % = dense or keypoint
+cache_version_bow = "1000-gray-keypoint";
+sift_method = "dense";                                 % = dense or keypoint
 BoW_train_imgs = bagging_images(train_im, vocab, loading_bow_if_possible, saving_when_done, "train", sift_method, cache_version_bow, colorspace); % transform images to BoW representation
 BoW_test_imgs = bagging_images(test_im, vocab, loading_bow_if_possible, saving_when_done, "test", sift_method, cache_version_bow, colorspace); % transform images to BoW representation
 
