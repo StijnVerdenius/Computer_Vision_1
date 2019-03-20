@@ -12,10 +12,10 @@ vl_setup()
 
 %% create vocabulary
 
-vocabulary_size = 400;                    % According to assignment either 400, 1000 or 4000
+vocabulary_size = 4000;                    % According to assignment either 400, 1000 or 4000
 loading_vocab_if_possible = true;          % defines whether vocabulary will be loaded from cache
 saving_when_done = true;                   % defines whether it will be cached after generating, given its not loaded
-cache_version_vocab = "400-rgb";
+cache_version_vocab = "4000-rgb";
 apply_sampling = true;
 number_of_samples = 10^6;
 colorspace = "rgb";
@@ -41,7 +41,7 @@ two_dimensional_pictures = true;         % load pictures into vectors or plottab
 
 loading_bow_if_possible = true;                           % same as before
 saving_when_done = true;                                  % same as before
-cache_version_bow = "400-rgb";
+cache_version_bow = "4000-rgb";
 sift_method = "dense";                                 % = dense or keypoint
 BoW_train_imgs = bagging_images(train_im, vocab, loading_bow_if_possible, saving_when_done, "train", sift_method, cache_version_bow, colorspace); % transform images to BoW representation
 BoW_test_imgs = bagging_images(test_im, vocab, loading_bow_if_possible, saving_when_done, "test", sift_method, cache_version_bow, colorspace); % transform images to BoW representation
@@ -60,9 +60,9 @@ models = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 % MAP = victor_train_test(BoW_train_imgs, train_label, BoW_test_imgs, test_label, classes);
 % disp("Mean Average Precision is (victor) " + MAP);
 
-[AP, MAP, scores, best_image_index] = test_models(models, BoW_test_imgs, test_label, classes);
+[MA, AP, MAP, scores, best_image_index] = test_models(models, BoW_test_imgs, test_label, classes);
 
-disp("Mean Average Precision is" + MAP);
+disp("Mean Average Precision = " + MAP + ", Mean Accuracy = " + MA);
 
 visualize_images(test_im, best_image_index, scores, sift_method, colorspace, vocabulary_size, AP, MAP); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
 
