@@ -1,0 +1,2 @@
+This folder is for saving results
+> no need to do anything, just don't delete it

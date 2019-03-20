@@ -1,4 +1,4 @@
-function [MA, AP, MAP, sorted_classification_score, index] = test_models(models, bows, actual_labels, classes) % EX. 2.6 --- is this the prefictor part?
+function [MA, AP, MAP, sorted_classification_score, index] = test_models(models, bows, actual_labels, classes, cache_version) % EX. 2.6 --- is this the prefictor part?
 % trains a SVM model with bows representations. (NOT FINISHED)
 
 disp("started evaluating testset");
@@ -83,6 +83,8 @@ Accuracy = [Accuracy(1);Accuracy(2);Accuracy(3);Accuracy(4);Accuracy(5)];
 Average_Precision = [AP(1);AP(2);AP(3);AP(4);AP(5)];
 
 T = table(Classifier, Average_Precision, Accuracy)
+
+cache_data("result_table", T, cache_version);
 
 disp("finished evaluating testset");    
     

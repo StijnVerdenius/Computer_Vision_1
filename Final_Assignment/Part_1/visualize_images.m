@@ -1,4 +1,4 @@
-function [] = visualize_images(images, index, scores, sift_method, colorspace, vocabulary_size, AP, MAP)
+function [] = visualize_images(images, index, scores, sift_method, colorspace, vocabulary_size, AP, MAP, save_version)
 
 % rows = class, column = image index
 top5_set_idx = index(:, 1:5);
@@ -27,7 +27,7 @@ for i = 1:25
 end
 sgtitle('Top 5')
 
-saveas(gcf,'Top 5, ' + colorspace + '-' + vocabulary_size + '-' + sift_method + '.png');
+saveas(gcf,get_path("results") + 'Top 5, ' + save_version + '.png');
 
 
 bottom5 = figure('NumberTitle', 'off', 'Name', 'Bottom 5 test images per setup (' + sift_method + ', ' + colorspace + ', mAP = ' + MAP + ', k = ' +  vocabulary_size + ')');
@@ -51,7 +51,7 @@ for i = 1:25
 end
 sgtitle('Bottom 5')
 
-saveas(bottom5,'Bottom 5, ' + colorspace + '-' + vocabulary_size + '-' + sift_method + '.png');
+saveas(bottom5, get_path("results") + 'Bottom 5, ' + save_version + '.png');
 
 end
 
