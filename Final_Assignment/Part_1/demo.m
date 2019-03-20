@@ -29,7 +29,7 @@ wanted_classes = ["airplane", "bird", "ship", "horse", "car"];
 
 % change the following for different data selection
 start_index = 1;                         % index from which to start loading data in cas of non random loading
-percentage_of_data = 0.5;               % percentage of data loaded into model
+percentage_of_data = 1.00;               % percentage of data loaded into model
 random_selection = false;                % wether selection is random images
 two_dimensional_pictures = true;         % load pictures into vectors or plottable images
 
@@ -57,12 +57,12 @@ models = train_models(BoW_train_imgs, train_label, classes); % (EX. 1.1)
 %% test model
 
 
-MAP = victor_train_test(BoW_train_imgs, train_label, BoW_test_imgs, test_label, classes);
-disp("Mean Average Precision is (victor) " + MAP);
+% MAP = victor_train_test(BoW_train_imgs, train_label, BoW_test_imgs, test_label, classes);
+% disp("Mean Average Precision is (victor) " + MAP);
 
 [AP, MAP, scores, best_image_index] = test_models(models, BoW_test_imgs, test_label, classes);
 
-disp("Mean Average Precision is (us) " + MAP);
+disp("Mean Average Precision is" + MAP);
 
 visualize_images(test_im, best_image_index, scores, sift_method, colorspace, vocabulary_size, AP, MAP); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
 

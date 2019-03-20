@@ -3,6 +3,7 @@ function [AP, MAP, sorted_classification_score, index] = test_models(models, bow
 
 disp("started evaluating testset");
 
+
 %Average Precisions
 AP = zeros(length(models),1);
 classification_score = zeros(length(models), size(bows, 2));
@@ -46,12 +47,14 @@ end
 
 %Average Precision calculations
 for m = 1:numel(models)
+    sorted_labels = actual_labels(index(m,:));
     score = 0;
     cumulative = 0;
     
     for i = 1:numel(actual_labels)
         % 1 if predicted label matches actual label or 0 otherwise
-        x_i = actual_labels(index(m,i)) == pred_label(index(m,i));
+%         x_i = actual_labels(index(m,i)) == pred_label(index(m,i));
+        x_i = sorted_labels(i) == classes(m);
         cumulative = cumulative + x_i;
         f_c = x_i * cumulative;
         score = score + (f_c)/i;

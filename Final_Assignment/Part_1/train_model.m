@@ -112,7 +112,7 @@ new_labels = new_labels(permutations);
 
 %train binary SVM 
 
-model = fitcsvm(double(train_set.'), new_labels,'ClassNames',[0 1],'KernelFunction','rbf', 'Cost',[0 1;4 0]);
+model = fitcsvm(double(train_set.'), new_labels,'ClassNames',[0 1],'KernelFunction','rbf', 'Cost',[0 5;4 0]);
 
 % model = train(double(new_labels), sparse(train_set.'), '-b');
 
