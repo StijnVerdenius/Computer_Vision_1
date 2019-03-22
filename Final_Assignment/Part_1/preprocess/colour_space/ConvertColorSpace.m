@@ -6,12 +6,8 @@ function [new_image] = ConvertColorSpace(input_image, colorspace)
 %                                                        
 % Colorspace options:                                    
 %   opponent                                            
-%   rgb -> for normalized RGB
-%   hsv
-%   ycbcr
 %   gray
 %
-% P.S: Do not forget the visualization part!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % convert image into double precision for conversions
@@ -21,9 +17,6 @@ if strcmp(colorspace, 'opponent')
     
     new_image = rgb2opponent(input_image); % fill in this function
     
-elseif strcmp(colorspace, 'rgb')  
-    
-    new_image = rgb2normedrgb(input_image); % fill in this function
         
 elseif strcmp(colorspace, 'gray')
     

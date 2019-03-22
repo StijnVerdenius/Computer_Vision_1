@@ -1,5 +1,9 @@
-function [output_image] = rgb2opponent(input_image)
-% converts an RGB image into opponent color space
+function [output_image] = rgb2opponent(input_image)	 % DOCSTRING_GENERATED
+ % RGB2OPPONENT		 [converts an RGB image into opponent color space]
+ % INPUTS 
+ %			input_image = self explanatory
+ % OUTPUTS 
+ %			output_image = self explanatory
 
 % split image
 [R, G, B] = getColorChannels(input_image);

@@ -1,8 +1,7 @@
-function [imgs, labels] = load_image_data(set, percentage_to_load, random, from_index, classes, reshaped)
-% function loads data into images and labels
+function [imgs, labels] = load_image_data(set, percentage_to_load, random, from_index, classes, reshaped)	 % DOCSTRING_GENERATED
+ % LOAD_IMAGE_DATA		 [function loads data into images and labels]
 
-
-% IMPORTANT: put data in folder stl10_matlab
+% IMPORTANT (!!!!): put data in folder stl10_matlab
 
 
 %input:
@@ -58,5 +57,3 @@ disp("Loading finished");
 
 
 end
-
-% TODO: maybe add id to images and labels so we can make sure they match?

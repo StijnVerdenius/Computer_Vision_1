@@ -1,5 +1,11 @@
-function trimmed = remove_unwanted_classes(raw, classes)
-% function removes unwanted classes from dataset
+function trimmed = remove_unwanted_classes(raw, classes)	 % DOCSTRING_GENERATED
+ % REMOVE_UNWANTED_CLASSES		 [function removes unwanted classes from dataset]
+ % INPUTS 
+ %			raw = data struct with all classes
+ %			classes = classes list you want to keep (string) 
+ % OUTPUTS 
+ %			trimmed = data struct with less classes
+
 
 number_of_classes = numel(classes);
 
@@ -10,7 +16,10 @@ else
     % otherwise, remove classes that are not specified
     
     max = size(raw.y, 1);
-    boolean_indices = zeros(max, 1); % will be used as a lookup table to say "this image should or shouldn't be used"
+    
+    % will be used as a lookup table to say "this image should or shouldn't be used"
+    boolean_indices = zeros(max, 1); 
+    
     class_indices = zeros(number_of_classes, 1);
     
     % get class indices

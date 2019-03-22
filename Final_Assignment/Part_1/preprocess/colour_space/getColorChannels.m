@@ -1,5 +1,6 @@
-function [R, G, B] = getColorChannels(input_image)
-% helper function that seperates an image into its color channels
+function [R, G, B] = getColorChannels(input_image)	 % DOCSTRING_GENERATED
+ % GETCOLORCHANNELS		 [helper function that seperates an image into its color channels]
+
 
 R = input_image(:,:,1);
 G = input_image(:,:,2);

@@ -1,6 +1,16 @@
-function path = get_path(keyword)
-% gets a data path out given a keyword, such that when changing paths you
+function path = get_path(keyword)	 % DOCSTRING_GENERATED
+ % GET_PATH	
+ 
+ % gets a data path out given a keyword, such that when changing paths you
 % only need to change one function and not go through all files.
+
+ % INPUTS 
+ %			keyword = 'raw_data', 'cache' or 'results'
+ % OUTPUTS 
+ %			path = path from running folder
+
+
+
 
 main_path = "./Part_1";
 delimiter = "/";

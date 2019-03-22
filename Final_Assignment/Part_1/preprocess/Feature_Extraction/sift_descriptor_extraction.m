@@ -1,23 +1,28 @@
-function descriptors_concat = sift_descriptor_extraction(img, method, colorspace)
-% transforms image to sift descriptor (gray-scale only) (NOT FINISHED)
+function descriptors_concat = sift_descriptor_extraction(img, method, colorspace)	 % DOCSTRING_GENERATED
+ % SIFT_DESCRIPTOR_EXTRACTION		 [transforms image to sift descriptors]
+ % INPUTS 
+ %			img = one image
+ %			method = 'keypoint' or 'dense'
+ %			colorspace = 'grayscale', 'rgb' or 'opponent'
+ % OUTPUTS 
+ %			descriptors_concat = descriptors of this image
+
 
 assert((strcmp( method, "keypoint")) || (strcmp( method, "dense")));
+assert((strcmp( colorspace, "grayscale")) || (strcmp( colorspace, "rgb")) || (strcmp( colorspace, "opponent")));
 
-img_gray = ConvertColorSpace(img, 'gray'); % transform to grayscale
-img_opp = ConvertColorSpace(img, 'opponent');
-
-% TODO: presmoothing???
-
-
+% for pre smoothing
 binSize = 9 ;
 magnif = 3 ;
 smoothing_constant = sqrt((binSize/magnif)^2 - .25);
 
+% get descriptors
 switch colorspace
     case 'grayscale'
+        img_gray = ConvertColorSpace(img, 'gray'); 
         descriptors = cell(1,1);
         if (strcmp( method, "keypoint"))
-            [~, descriptors{1}] = vl_sift(im2single(img_gray)); % get descriptors
+            [~, descriptors{1}] = vl_sift(im2single(img_gray));
         else
             [~, descriptors{1}] = vl_dsift(vl_imsmooth(im2single(img_gray), smoothing_constant), 'step', 5, 'size', 21, 'fast');
         end
@@ -33,6 +38,7 @@ switch colorspace
             end
         end
     case 'opponent'
+        img_opp = ConvertColorSpace(img, 'opponent');
         descriptors = cell(1,3);
         if (strcmp( method, "keypoint"))
             for channel=1:3
@@ -47,10 +53,6 @@ switch colorspace
         error("unrecognized sift option: "+ method);
 end   
 
-
 descriptors_concat = cell2mat(descriptors);
-% TODO: tune vldsift parameters
-% TODO: check if the right descriptors are being returned.
-% TODO: do we need the frames?
 
 end

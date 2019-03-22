@@ -1,9 +1,12 @@
-function descriptors = get_descriptors(imgs, colorspace) % (EX. 2.1)
-% generates descriptors for multiple images 
+function descriptors = get_descriptors(imgs, colorspace)  % DOCSTRING_GENERATED
+ % GET_DESCRIPTORS		 [generates descriptors for multiple images]
+ % INPUTS 
+ %			imgs = images
+ %          colorspace = 'grayscale', 'rgb' or 'opponent'
+ % OUTPUTS 
+ %			descriptors = tensor of descriptors
 
 disp("start generating descriptors");
-
-% TODO: check after implementing opponent and rgb sift that it still works
 
 % change images to right shape, can be ignored
 batch_dimension = numel(size(imgs));

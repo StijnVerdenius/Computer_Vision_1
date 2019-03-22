@@ -1,4 +1,19 @@
-function [MA, AP, MAP, sorted_classification_score, index] = test_models(models, bows, actual_labels, classes, cache_version) % EX. 2.6 --- is this the prefictor part?
+function [MA, AP, MAP, sorted_classification_score, index] = test_models(models, bows, actual_labels, classes, cache_version) % EX. 2.6 --- is this the prefictor part?	 % DOCSTRING_GENERATED
+ % TEST_MODELS		 [add function description here]
+ % INPUTS 
+ %			models = ..
+ %			bows = ..
+ %			actual_labels = ..
+ %			classes = ..
+ %			cache_version = ..
+ % OUTPUTS 
+ %			MA = ..
+ %			AP = ..
+ %			MAP = ..
+ %			sorted_classification_score = ..
+ %			index = ..
+
+
 % trains a SVM model with bows representations. (NOT FINISHED)
 
 disp("started evaluating testset");

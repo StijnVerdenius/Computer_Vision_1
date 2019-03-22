@@ -1,5 +1,17 @@
-function bow_imgs = bagging_images(imgs, vocab, load_from_file, save_to_file, set_name, sift_method, cache_version, colorspace)
-% converts many images to bag of words descriptor given a vocabulary
+function bow_imgs = bagging_images(imgs, vocab, load_from_file, save_to_file, set_name, sift_method, cache_version, colorspace)	 % DOCSTRING_GENERATED
+ % BAGGING_IMAGES		 [converts many images to bag of words representation given a vocabulary]
+ % INPUTS 
+ %			imgs = images
+ %			vocab = vocabulary
+ %			load_from_file = boolean, load from cache file or not
+ %			save_to_file = boolean, save to cache file or not
+ %			set_name = 'train' or 'test'
+ %			sift_method = 'keypoint' or 'dense'
+ %			cache_version = to specify which vocabulary
+ %			colorspace = 'grayscale', 'rgb' or 'opponent'
+ % OUTPUTS 
+ %			bow_imgs = bag of words representations of all images
+
 
 disp("started finding bag of words representations");
 

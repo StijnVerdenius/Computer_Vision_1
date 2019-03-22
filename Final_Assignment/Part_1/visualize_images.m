@@ -1,4 +1,18 @@
-function [] = visualize_images(images, index, scores, sift_method, colorspace, vocabulary_size, AP, MAP, save_version)
+function visualize_images(images, index, scores, sift_method, colorspace, vocabulary_size, AP, MAP, save_version)	 % DOCSTRING_GENERATED
+ % VISUALIZE_IMAGES		 [visualizes images of run]
+ % INPUTS 
+ %			images = ..
+ %			index = ..
+ %			scores = ..
+ %			sift_method = ..
+ %			colorspace = ..
+ %			vocabulary_size = ..
+ %			AP = ..
+ %			MAP = ..
+ %			save_version = ..
+ % OUTPUTS 
+
+
 
 % rows = class, column = image index
 top5_set_idx = index(:, 1:5);
@@ -16,7 +30,7 @@ for i = 1:25
         image_idx = 5;
     end
     imshow(images(:,:,:,top5_set_idx(class_idx,image_idx)));
-%     title(round(scores(class_idx, image_idx),3)) %this is for the scores as image titles
+    title(round(scores(class_idx, image_idx),3)) %this is for the scores as image titles
     if image_idx ==1
 %         ylabel({classes{class_idx},"AP = " + round(AP(class_idx),3)}); %remove AP when done
         ylabel(classes{class_idx}); %remove AP when done
@@ -42,7 +56,7 @@ for i = 1:25
     imshow(images(:,:,:,bottom5_set_idx(class_idx,image_idx))); 
     title(round(scores(class_idx, end-(5-image_idx)),3)) %this is for the scores as image titles
     if image_idx ==1
-%         ylabel({classes{class_idx},"AP = " + round(AP(class_idx),3)});
+%         ylabel({classes{class_idx},"AP = " + round(AP(class_idx),3)}); %remove AP when done
         ylabel(classes{class_idx}); %remove AP when done
     end    
     if rem(i,5) == 0
