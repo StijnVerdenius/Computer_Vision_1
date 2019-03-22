@@ -33,12 +33,10 @@ for a = 1:numel(vocabulary_sizes)
                   %% create vocabulary
 
                   % VARIABLES TO SET
-                  											% either 400, 1000 or 4000
-                  loading_vocab_if_possible = true;								% defines whether vocabulary will be loaded from cache
-                  saving_when_done = true;										% defines whether it will be cached after generating, given its not loaded
-                  apply_sampling = true;											% apply sampling of descriptors before entering k means
-                  number_of_samples = 5*10^3;										% if you do sampling, how many?
-                  										        % define the to be used color space
+                  loading_vocab_if_possible = true;	% defines whether vocabulary will be loaded from cache
+                  saving_when_done = true;		% defines whether it will be cached after generating, given its not loaded
+                  apply_sampling = true;			% apply sampling of descriptors before entering k means
+                  number_of_samples = 5*10^3;		% if you do sampling, how many?
 
                   % automatically deduce cache version
                   cache_version_vocab = colourspace + "_" + vocabulary_size;
@@ -50,11 +48,11 @@ for a = 1:numel(vocabulary_sizes)
                   %% extract data for training and testing
 
                   % VARIABLES TO SET
-                  wanted_classes = ["airplane", "bird", "ship", "horse", "car"]; 	% which classes to use
-                  start_index = 1;                         						% index from which to start loading data in cas of non random loading
-                  percentage_of_data = 1.0;               						% percentage of data loaded into model
-                  random_selection = false;                						% wether selection is random images
-                  two_dimensional_pictures = true;        						% load pictures into vectors or plottable images
+                  wanted_classes = ["airplane", "bird", "ship", "horse", "car"]; 	        % which classes to use
+                  start_index = 1;                         						  % index from which to start loading data in cas of non random loading
+                  percentage_of_data = 1.0;               						  % percentage of data loaded into model
+                  random_selection = false;                						  % wether selection is random images
+                  two_dimensional_pictures = true;        						  % load pictures into vectors or plottable images
 
                   % get data
                   [train_im, train_label] = load_image_data("train" , percentage_of_data, random_selection, start_index, wanted_classes, two_dimensional_pictures);
