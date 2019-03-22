@@ -22,7 +22,7 @@ loading_vocab_if_possible = true;								% defines whether vocabulary will be lo
 saving_when_done = true;										% defines whether it will be cached after generating, given its not loaded
 apply_sampling = true;											% apply sampling of descriptors before entering k means
 number_of_samples = 5*10^5;										% if you do sampling, how many?
-colorspace = "rgb";										% define the to be used color space	
+colorspace = "rgb";										        % define the to be used color space
 
 % automatically deduce cache version
 cache_version_vocab = colorspace + "_" + vocabulary_size;

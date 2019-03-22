@@ -1,28 +1,23 @@
 function [net, info, expdir] = finetune_cnn(varargin)
 
 %% Define options
-run(fullfile(fileparts(mfilename('fullpath')), ...
-  '..', '..', '..', 'matlab', 'vl_setupnn.m')) ;
+run('vl_setupnn.m') ;
 
 opts.modelType = 'lenet' ;
 [opts, varargin] = vl_argparse(opts, varargin) ;
 
-opts.expDir = fullfile('data', ...
+opts.expDir = fullfile('Part_2/data', ...
   sprintf('cnn_assignment-%s', opts.modelType)) ;
 [opts, varargin] = vl_argparse(opts, varargin) ;
 
-opts.dataDir = './data/' ;
+opts.dataDir = 'Part_2/data/' ;
 opts.imdbPath = fullfile(opts.expDir, 'imdb-stl.mat');
 opts.whitenData = true ;
 opts.contrastNormalization = true ;
 opts.networkType = 'simplenn' ;
 opts.train = struct() ;
 opts = vl_argparse(opts, varargin) ;
-if ~isfield(opts.train, 'gpus'), opts.train.gpus = []; end;
-
-opts.train.gpus = [0];
-
-
+if ~isfield(opts.train, 'gpus'), opts.train.gpus = []; end
 
 %% update model
 
@@ -68,9 +63,10 @@ end
 end
 
 function [images, labels] = getSimpleNNBatch(imdb, batch)
+
 % -------------------------------------------------------------------------
-images = imdb.images.data(:,:,:,batch) ;
-labels = imdb.images.labels(1,batch) ;
+images = single(imdb.images.data(:,:,:,batch)) ;
+labels = imdb.images.labels(batch) ;
 if rand > 0.5, images=fliplr(images) ; end
 
 end
@@ -80,7 +76,7 @@ function imdb = getIMDB()
 % -------------------------------------------------------------------------
 % Preapre the imdb structure, returns image data with mean image subtracted
 classes = {'airplanes', 'birds', 'ships', 'horses', 'cars'};
-splits = {'train', 'test'};
+% splits = {'train', 'test'};
 
 %% TODO: Implement your loop here, to create the data structure described in the assignment
 %% Use train.mat and test.mat we provided from STL-10 to fill in necessary data members for training below
@@ -100,8 +96,8 @@ relevant_classes = [1 2 3 7 9];
 % initialzie data, labels and sets
 new_length = length(train.y)/2 + length(test.y)/2;
 data = zeros(32, 32, 3, new_length);
-labels = zeros(new_length, 1);
-sets = zeros(new_length, 1); 
+labels = zeros(1, new_length);
+sets = zeros(1, new_length); 
 
 idx = 0;
 
@@ -137,7 +133,7 @@ end
 dataMean = mean(data(:, :, :, sets == 1), 4);
 data = bsxfun(@minus, data, dataMean);
 
-imdb.images.data = data ;
+imdb.images.data = single(data) ;
 imdb.images.labels = single(labels) ;
 imdb.images.set = sets;
 imdb.meta.sets = {'train', 'val'} ;
