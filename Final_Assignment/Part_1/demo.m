@@ -36,7 +36,7 @@ for a = 1:numel(vocabulary_sizes)
                   loading_vocab_if_possible = true;	% defines whether vocabulary will be loaded from cache
                   saving_when_done = true;		% defines whether it will be cached after generating, given its not loaded
                   apply_sampling = true;			% apply sampling of descriptors before entering k means
-                  number_of_samples = 5*10^3;		% if you do sampling, how many?
+                  number_of_samples = 5*10^5;		% if you do sampling, how many?
 
                   % automatically deduce cache version
                   cache_version_vocab = colourspace + "_" + vocabulary_size;
@@ -48,7 +48,7 @@ for a = 1:numel(vocabulary_sizes)
                   %% extract data for training and testing
 
                   % VARIABLES TO SET
-                  wanted_classes = ["airplane", "bird", "ship", "horse", "car"]; 	        % which classes to use
+                  wanted_classes = ["airplane", "bird", "ship", "horse", "car"];  % which classes to use
                   start_index = 1;                         						  % index from which to start loading data in cas of non random loading
                   percentage_of_data = 1.0;               						  % percentage of data loaded into model
                   random_selection = false;                						  % wether selection is random images
