@@ -295,11 +295,6 @@ for i=1:n
   if opts.skipForward, break; end;
   l = net.layers{i} ;
   res(i).time = tic ;
-%   if i==12
-%       disp(size(res(i).x))
-%       disp(size(l.weights{1}))
-%       disp(size(l.weights{2}))
-%   end
   switch l.type
     case 'conv'
       res(i+1).x = vl_nnconv(res(i).x, l.weights{1}, l.weights{2}, ...

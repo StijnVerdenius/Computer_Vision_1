@@ -93,6 +93,9 @@ test.indicator = 2;
 % indicators for the relevant classes (airplane bird car horse ship)
 relevant_classes = [1 2 3 7 9];
 
+% mapping to class labels [1 2 3 4 5]
+class_map = [1 2 3 0 0 0 4 0 5 0];
+
 % initialzie data, labels and sets
 new_length = length(train.y)/2 + length(test.y)/2;
 data = zeros(32, 32, 3, new_length);
@@ -104,8 +107,8 @@ idx = 0;
 train_test = {train, test};
 
 for j=1:2
-    
-    set = train_test{1};
+        
+    set = train_test{j};
     
     % keep only relevant classes
     condition = ismember(set.y, relevant_classes);
@@ -121,11 +124,12 @@ for j=1:2
         im_rgb = reshape(im_array, 96, 96, 3);
         
         data(: ,:, :, idx) = imresize(im_rgb, 1/3); % rescaled to 32, 32, 3
-        labels(idx) = set.y(i);
+        labels(idx) = class_map(set.y(i));
         sets(idx) = set.indicator;
     end
     
 end
+
 
 
 %%
