@@ -22,7 +22,7 @@ for index = 1:numel(images)-1
     frame1 = images(index).data;
     frame2 = images(index+1).data;
     
-    [vecX,vecY] = lucas_kanade3(frame1,frame2,fracture,[current_Y;current_X]);
+    [vecX,vecY] = lucas_kanade_new(frame1,frame2,fracture,[current_Y;current_X]);
         
     % add velocities as vector to current 
     current_Y = current_Y + vecY .* magic_multiplication;

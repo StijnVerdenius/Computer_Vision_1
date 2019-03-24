@@ -1,4 +1,4 @@
-function [vx, vy] = lucas_kanade3(image1, image2, fracture, points)
+function [vx, vy] = lucas_kanade_new(image1, image2, fracture, points)
 
 % convert to standardized
 image1 = im2double(rgb2gray(image1));
