@@ -6,19 +6,19 @@ opts = vl_argparse(opts, varargin) ;
 %% TODO: PLAY WITH THESE PARAMETERTS TO GET A BETTER ACCURACY
 
 lr_prev_layers = [.2, 2];
-lr_new_layers  = [1, 4]; 
+lr_new_layers  = [.05, 0.2]; 
 
 lr = lr_prev_layers ;
 
 % Meta parameters
 net.meta.inputSize = [32 32 3] ;
-% net.meta.trainOpts.learningRate = [ 0.05*ones(1,20) ...
-%                                     0.005*ones(1,20)...
-%                                     0.0005*ones(1,10)...
+% net.meta.trainOpts.learningRate = [ 0.01*ones(1,20) ...
+%                                     0.001*ones(1,20)...
+%                                     0.0001*ones(1,10)...
 %                                     ] ;
-net.meta.trainOpts.learningRate = linspace(0.001, 0.0001, 50);
+net.meta.trainOpts.learningRate = linspace(0.01, 0.0001, 80);
 net.meta.trainOpts.weightDecay = 0.0001 ;
-net.meta.trainOpts.batchSize = 100 ;
+net.meta.trainOpts.batchSize = 50;
 net.meta.trainOpts.numEpochs = numel(net.meta.trainOpts.learningRate) ;
 
 %% Define network 
@@ -79,7 +79,7 @@ NEW_OUTPUT_SIZE = 5;
 
 net.layers{end+1} = struct('type', 'conv', ...
                            'weights', {{0.05*randn(1,1,NEW_INPUT_SIZE,NEW_OUTPUT_SIZE, 'single'), zeros(1,NEW_OUTPUT_SIZE,'single')}}, ...
-                           'learningRate', .1*lr_new_layers, ...
+                           'learningRate', 0.1* lr_new_layers, ...
                            'stride', 1, ...
                            'pad', 0) ;
 
@@ -89,8 +89,6 @@ net.layers{end+1} = struct('type', 'softmaxloss') ;
 
 % Fill in default values
 net = vl_simplenn_tidy(net) ;
-
-save('Part_2/data/newnet.mat', 'net');
 
 oldnet = load('Part_2/data/pre_trained_model.mat'); oldnet = oldnet.net;
 net = update_weights(oldnet, net);
