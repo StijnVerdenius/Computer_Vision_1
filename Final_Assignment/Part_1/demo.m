@@ -90,7 +90,7 @@ for a = 1:numel(vocabulary_sizes)
 
                   % visualize and save
                   visualize_images(test_im, best_image_index, scores, sift_method, colourspace, vocabulary_size, AP, MAP, cache_version_result); %Need to edit this to add setup to titles specifications (SIFT sampling variants, vocabulary size, SIFT color variants)
-
+               
             end
       end
 end
