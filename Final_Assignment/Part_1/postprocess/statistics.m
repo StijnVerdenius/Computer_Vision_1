@@ -1,5 +1,16 @@
 function [] = statistics(sift_methods, colour_spaces, vocabulary_sizes)
-
+% STATISTICS		 [conducts statistics on the data collected from all settings]
+ % INPUTS 
+ %			sift_methods = ['dense', 'keypoint']
+ %			colorspaces = ['rgb', 'opponent' , 'Grayscale']
+ %			vocabulary_sizes = [400, 1000, 4000]
+ % OUTPUTS 
+ %			results of Anderson-Darling normality test
+ %          Results of 3-way ANOVA
+ %          Bar plot of MAP for all settings
+ %          Tables for MAP and standard deviation for all settings
+ 
+ 
 experiment = [];
 AP = [];
 s_methods = [];
@@ -34,25 +45,11 @@ for i = 1:length(AP)
 end
 
 
-% % 1. Convert the between-subject factors to categorical.
-% etype_cat=categorical(Etype); treatment_cat=categorical(Treatment);
-% % 2. Create an interaction factor capturing each combination of levels % of Etype and Treatment (you can check with the function "catogories()")
-% interaction_cat=etype_cat.*treatment_cat;
-% % 3. Call fitrm with the modified between design.
-% t2 = table(interaction_cat, s_methods, c_spaces, v_sizes, ... 'VariableNames', {'interaction_etype_treat', 'pre', 'during', 'post'});
-% rm2 = fitrm(t2, 'pre-post ~ interaction_etype_treat', ... 'WithinModel', Time, 'WithinModel', 'separatemeans');
-% % 4. Use interaction factor interaction_cat as the first variable in % multcompare, 'By' Time
-% tbl2=multcompare(rm2,'interaction_etype_treat','By','Time');
+% 3-way ANOVA--------------------------------------------------------------
+[~,~,stats] = anovan(reshape(AP,1,numel(AP)),{s_methods,c_spaces,v_sizes},'model','interaction',...
+    'varnames',{'sampling','colour space','vocabulary size'});
 
-
-
-
-
-% % 
-% [~,~,stats] = anovan(reshape(AP,1,numel(AP)),{s_methods,c_spaces,v_sizes},'model','interaction',...
-%     'varnames',{'sampling','colour space','vocabulary size'});
-% 
-% results = multcompare(stats,'Dimension',[1 2 3]);
+results = multcompare(stats,'Dimension',[1 2 3]);
 
 % experiment
 
@@ -127,9 +124,9 @@ sgtitle('MAP for colour space vs. vocabulary size vs. sampling method')
 % newPosition = [0.77 0.77 0.2 0.2];
 % set(hLg,'Position', newPosition);
 
-%Table --------------------------------------------------------------------
-experiment
+%Tables --------------------------------------------------------------------
 
+disp('Dense Sampling Table')
 %Table displaying results for Dense sampling
 colour_space = {"RGB 400";"RGB 1000";"RGB 4000"; "Grayscale 400";"Grayscale 1000";"Grayscale 4000"; "Opponent 400"; "Opponent 1000"; "Opponent 4000"};
 % vocab_size = [[400, 1000, 4000];[400, 1000, 4000];[400, 1000, 4000]];
@@ -139,8 +136,8 @@ ACC = [MA(1); MA(2); MA(3); MA(4); MA(5); MA(6); MA(7); MA(8); MA(9)];
 SDA = [SA(1); SA(2); SA(3); SA(4); SA(5); SA(6); SA(7); SA(8); SA(9)];
 T = table(colour_space, MAP, SD, ACC, SDA)
 
-
-%Table displaying results for Dense sampling
+disp('Keypoint Sampling Table')
+%Table displaying results for Keypoint sampling
 colour_space = {"RGB 400";"RGB 1000";"RGB 4000"; "Grayscale 400";"Grayscale 1000";"Grayscale 4000"; "Opponent 400"; "Opponent 1000"; "Opponent 4000"};
 % vocab_size = [[400, 1000, 4000];[400, 1000, 4000];[400, 1000, 4000]];
 MAP = [M(10); M(11); M(12);M(13);M(14);M(15);M(16);M(17);M(18)];

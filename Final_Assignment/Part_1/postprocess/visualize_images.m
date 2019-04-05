@@ -1,16 +1,18 @@
 function visualize_images(images, index, scores, sift_method, colorspace, vocabulary_size, AP, MAP, save_version)	 % DOCSTRING_GENERATED
  % VISUALIZE_IMAGES		 [visualizes images of run]
  % INPUTS 
- %			images = ..
- %			index = ..
- %			scores = ..
- %			sift_method = ..
- %			colorspace = ..
- %			vocabulary_size = ..
- %			AP = ..
- %			MAP = ..
- %			save_version = ..
+ %			images = images
+ %			index = index of sorted images based on score (row =
+ %			classifier,  column = score)
+ %			scores = score outputted from SVM classifier
+ %			sift_method = 'dense' or 'keypoint'
+ %			colorspace = RGB, Opponent or Grayscale
+ %			vocabulary_size = number of K-means clusters
+ %			AP = Average Precision
+ %			MAP = Accuracy
+ %			save_version = name of saved file
  % OUTPUTS 
+ %          figure showing the top 5 and bottom 5 ranked test images for each setting
 
 
 
@@ -30,7 +32,7 @@ for i = 1:25
         image_idx = 5;
     end
     imshow(images(:,:,:,top5_set_idx(class_idx,image_idx)));
-    title(round(scores(class_idx, image_idx),3)) %this is for the scores as image titles
+%     title(round(scores(class_idx, image_idx),3)) %this is for the scores as image titles
     if image_idx ==1
 %         ylabel({classes{class_idx},"AP = " + round(AP(class_idx),3)}); %remove AP when done
         ylabel(classes{class_idx}); %remove AP when done
@@ -39,8 +41,10 @@ for i = 1:25
         class_idx = class_idx + 1;
     end
 end
-sgtitle('Top 5')
 
+sgtitle('Top 5 (' + sift_method + ', ' + colorspace + ', ' + vocabulary_size + ')')
+
+% top5 = tightfig(top5);
 saveas(gcf,get_path("results") + 'Top 5, ' + save_version + '.png');
 
 
@@ -54,7 +58,7 @@ for i = 1:25
         image_idx = 5;
     end
     imshow(images(:,:,:,bottom5_set_idx(class_idx,image_idx))); 
-    title(round(scores(class_idx, end-(5-image_idx)),3)) %this is for the scores as image titles
+%     title(round(scores(class_idx, end-(5-image_idx)),3)) %this is for the scores as image titles
     if image_idx ==1
 %         ylabel({classes{class_idx},"AP = " + round(AP(class_idx),3)}); %remove AP when done
         ylabel(classes{class_idx}); %remove AP when done
@@ -63,8 +67,9 @@ for i = 1:25
         class_idx = class_idx + 1;
     end
 end
-sgtitle('Bottom 5')
+sgtitle('Bottom 5 (' + sift_method + ', ' + colorspace + ', ' + vocabulary_size + ')')
 
+% bottom5 = tightfig(bottom5);
 saveas(bottom5, get_path("results") + 'Bottom 5, ' + save_version + '.png');
 
 end
