@@ -1,4 +1,7 @@
 function [trainset, testset] = get_svm_data_gl(data, net)
+% Slightly different variation of the function get_svm_data that was given
+% ignores the sparse transformation
+
 
 trainset.labels = [];
 trainset.features = [];
