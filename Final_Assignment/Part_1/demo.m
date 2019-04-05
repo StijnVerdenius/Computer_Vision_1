@@ -1,5 +1,7 @@
 %% main file for hand-in
 
+disp("NOTE: please run from Final_Assignment folder and please put train.mat and test.mat in folder Part_1/data/stl10_matlab")
+
 % prepare setup
 close all
 clear all
@@ -28,6 +30,8 @@ for a = 1:numel(vocabulary_sizes)
 
                   % get all classes from trainset to generate vocabulary
                   [vocab_building_imgs, ~] = load_image_data("train" , percentage_vocab, true, 1, ["all"], true);
+                  
+      
 
 
                   %% create vocabulary
